@@ -1,0 +1,914 @@
+/* ==========================================
+   VARIABLES CSS (Couleurs et espacements)
+   ========================================== */
+:root {
+    /* Couleurs principales (thème cyan/turquoise) */
+    --primary-color: #00D9D9;  /* Cyan principal */
+    --primary-dark: #00B8B8;   /* Cyan foncé pour hover */
+    --secondary-color: #2D3142; /* Gris foncé pour texte */
+    --accent-color: #FF6B6B;    /* Rouge accent */
+    
+    /* Couleurs de fond */
+    --bg-light: #F8F9FA;        /* Fond clair pour sections */
+    --bg-dark: #1A1A1A;         /* Fond sombre pour footer/nav */
+    --bg-white: #FFFFFF;        /* Blanc pur */
+    
+    /* Couleurs de texte */
+    --text-primary: #2D3142;    /* Texte principal */
+    --text-secondary: #6C757D;  /* Texte secondaire */
+    --text-light: #FFFFFF;      /* Texte blanc */
+    
+    /* Espacements (en rem pour responsive) */
+    --spacing-xs: 0.5rem;   /* 8px */
+    --spacing-sm: 1rem;     /* 16px */
+    --spacing-md: 2rem;     /* 32px */
+    --spacing-lg: 3rem;     /* 48px */
+    --spacing-xl: 5rem;     /* 80px */
+    
+    /* Tailles de police (rem pour adaptation écran) */
+    --font-size-xs: 0.875rem;   /* 14px */
+    --font-size-sm: 1rem;       /* 16px */
+    --font-size-md: 1.125rem;   /* 18px */
+    --font-size-lg: 1.5rem;     /* 24px */
+    --font-size-xl: 2rem;       /* 32px */
+    --font-size-xxl: 2.5rem;    /* 40px */
+    
+    /* Transitions */
+    --transition-speed: 0.3s;
+}
+
+/* ==========================================
+   RESET & BASE STYLES
+   Normalisation pour tous les navigateurs
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Inclut padding/border dans width/height */
+}
+
+html {
+    scroll-behavior: smooth; /* Défilement fluide pour ancres */
+    font-size: 16px; /* Base pour rem  cela sera facilement adapte pour tout ecran*/
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-primary);
+    line-height: 1.6; /* Meilleure lisibilité */
+    background-color: var(--bg-white);
+}
+
+/* Limite la largeur du contenu sur grands écrans */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* Styles des liens par défaut */
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--transition-speed);
+}
+
+/* Responsive images */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ==========================================
+   NAVIGATION BAR (Menu fixe en haut)
+   Reste visible lors du scroll
+   ========================================== */
+.navbar {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    position: fixed; /* Fixé en haut de l'écran */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Au-dessus de tout le contenu */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: var(--spacing-sm) 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between; /* Logo à gauche, menu à droite */
+    align-items: center;
+}
+
+/* Logo/Nom en haut à gauche */
+.logo {
+    font-size: var(--font-size-lg);
+    font-weight: bold;
+}
+
+.logo .nom {
+    color: var(--text-light);
+}
+
+.logo .prenom {
+    color: var(--primary-color);
+}
+
+/* Menu de navigation */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-md);
+}
+
+.nav-link {
+    color: var(--text-light);
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    transition: color var(--transition-speed);
+}
+
+.nav-link:hover {
+    color: var(--primary-color); /* Change de couleur au survol */
+}
+
+/* Bouton hamburger (visible seulement sur mobile) */
+.hamburger {
+    display: none; /* Caché sur desktop */
+    flex-direction: column;
+    gap: 0.25rem;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 1.5rem;
+    height: 0.2rem;
+    background-color: var(--text-light);
+    transition: all var(--transition-speed);
+}
+
+/* ==========================================
+   HERO SECTION (Première section d'accueil)
+   Première impression avec accroche
+   ========================================== */
+.hero-section {
+    background: linear-gradient(135deg, var(--bg-light) 0%, #E8F5F5 100%);
+    padding: calc(var(--spacing-xl) + 3rem) 0 var(--spacing-xl) 0;
+    /* Padding-top augmenté pour compenser la navbar fixe */
+    margin-top: 4rem; /* Espace sous la navbar */
+    min-height: 90vh; /* Prend 90% de la hauteur de l'écran */
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 colonnes égales */
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: var(--font-size-xxl);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+}
+
+.hero-text .highlight {
+    color: var(--primary-color);
+}
+
+.hero-subtitle {
+    font-size: var(--font-size-md);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Bouton Call-to-Action */
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 0.5rem;
+    font-weight: bold;
+    transition: all var(--transition-speed);
+}
+
+.cta-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px); /* Léger mouvement vers le haut */
+    box-shadow: 0 5px 15px rgba(0, 217, 217, 0.3);
+}
+
+/* Image/Illustration hero */
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ==========================================
+   SECTION À PROPOS
+   Présentation du profil
+   ========================================== */
+.about-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--bg-white);
+}
+
+.section-title {
+    text-align: center;
+    font-size: var(--font-size-xxl);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+/* Ligne décorative sous le titre */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 4rem;
+    height: 0.25rem;
+    background-color: var(--primary-color);
+    margin: var(--spacing-sm) auto 0;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Photo plus petite que texte */
+    gap: var(--spacing-lg);
+    align-items: center;
+    margin-top: var(--spacing-lg);
+}
+
+/* Photo de profil circulaire */
+.profile-circle {
+    width: 18rem;
+    max-width: 100%;
+    /*height: 35rem;*/
+    border-radius: 1.2rem; /* Cercle im parfait */
+    overflow: hidden;
+    border: 0.5rem solid var(--primary-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.profile-circle img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover; /* Couvre tout le cercle */
+}
+
+.about-text p {
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+@media (max-width: 48rem) {
+    .profile-photo {
+        width: 10.5rem;
+    }
+}
+.about-image {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Liste des intérêts */
+.interest-list {
+    list-style: none;
+    margin: var(--spacing-md) 0;
+}
+
+.interest-list li {
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-secondary);
+}
+
+/* Bouton de téléchargement CV */
+.download-cv {
+    display: inline-block;
+    margin-top: var(--spacing-md);
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 0.5rem;
+    font-weight: bold;
+    transition: all var(--transition-speed);
+}
+
+.download-cv:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   SECTION PROJETS
+   Grille de cartes projets
+   ========================================== */
+.projects-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--bg-light);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Crée autant de colonnes que possible, min 300px */
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+/* Carte de projet individuelle */
+.project-card {
+    background-color: var(--bg-white);
+    padding: var(--spacing-md);
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all var(--transition-speed);
+}
+
+.project-card:hover {
+    transform: translateY(-5px); /* Monte légèrement au survol */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.project-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.project-card h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.project-card > p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Tags de technologies */
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin: var(--spacing-sm) 0;
+}
+
+.tag {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: var(--font-size-xs);
+}
+
+.project-description {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    margin: var(--spacing-sm) 0;
+}
+
+.project-link {
+    color: var(--primary-color);
+    font-weight: bold;
+    display: inline-block;
+    margin-top: var(--spacing-sm);
+    transition: transform var(--transition-speed);
+}
+
+.project-link:hover {
+    transform: translateX(5px); /* Se déplace vers la droite */
+}
+
+/* ==========================================
+   SECTION COMPÉTENCES
+   Barres de progression pour skills
+   ========================================== */
+.skills-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--bg-white);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 colonnes : soft et hard */
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.skills-category {
+    background-color: var(--bg-light);
+    padding: var(--spacing-md);
+    border-radius: 1rem;
+}
+
+.skills-subtitle {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+/* Item de compétence individuelle */
+.skill-item {
+    margin-bottom: var(--spacing-md);
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-xs);
+}
+
+.skill-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+
+/* Barre de progression */
+.skill-bar {
+    background-color: #E0E0E0;
+    height: 0.75rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.skill-progress {
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+    height: 100%;
+    border-radius: 1rem;
+    transition: width 1s ease-out; /* Animation de remplissage */
+    width: 0; /* Départ à 0, JavaScript va l'animer */
+}
+
+/* Grille des outils (badges) */
+.tools-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+}
+
+.tool-badge {
+    background-color: var(--bg-light);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: 2rem;
+    font-size: var(--font-size-sm);
+    border: 2px solid var(--primary-color);
+    color: var(--text-primary);
+    transition: all var(--transition-speed);
+}
+
+.tool-badge:hover {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+/* ==========================================
+   SECTION EXPÉRIENCES & FORMATION
+   Timeline avec deux colonnes
+   ========================================== */
+.experience-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--bg-light);
+}
+
+.timeline-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.timeline-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.timeline-item {
+    background-color: var(--bg-white);
+    padding: var(--spacing-md);
+    border-radius: 0.5rem;
+    margin-bottom: var(--spacing-md);
+    border-left: 4px solid var(--primary-color);
+    transition: all var(--transition-speed);
+}
+
+.timeline-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-date {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--spacing-xs);
+}
+
+.timeline-item h4 {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-xs);
+}
+
+.timeline-item p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.cert-list {
+    list-style: none;
+    margin-top: var(--spacing-xs);
+}
+
+.cert-list li {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin-bottom: 0.25rem;
+    padding-left: var(--spacing-sm);
+    position: relative;
+}
+
+.cert-list li::before {
+    content: '✓';
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+}
+
+/* ==========================================
+   SECTION HOBBIES
+   Grille de cartes hobbies
+   ========================================== */
+.hobbies-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--bg-white);
+}
+
+.hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.hobby-card {
+    background-color: var(--bg-light);
+    padding: var(--spacing-md);
+    border-radius: 1rem;
+    text-align: center;
+    transition: all var(--transition-speed);
+}
+
+.hobby-card:hover {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    transform: translateY(-5px);
+}
+
+.hobby-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.hobby-card h4 {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-xs);
+}
+
+.hobby-card p {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.hobby-card:hover p {
+    color: var(--text-light);
+}
+
+/* ==========================================
+   SECTION CONTACT
+   Formulaire et informations de contact
+   ========================================== */
+.contact-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.contact-header h2 {
+    font-size: var(--font-size-xxl);
+    margin-bottom: var(--spacing-sm);
+}
+
+.contact-header .highlight {
+    color: var(--primary-color);
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-lg);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Formulaire de contact */
+.contact-form {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: var(--spacing-md);
+    border-radius: 1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+    position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-light);
+    border-radius: 0.5rem;
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-speed);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.form-group textarea {
+    resize: vertical; /* Permet redimensionnement vertical uniquement */
+}
+
+/* Messages d'erreur (affichés par JavaScript) */
+.error-message {
+    color: var(--accent-color);
+    font-size: var(--font-size-xs);
+    margin-top: 0.25rem;
+    display: none; /* Caché par défaut */
+}
+
+.form-group.error input,
+.form-group.error textarea {
+    border-color: var(--accent-color);
+}
+
+.form-group.error .error-message {
+    display: block;
+}
+
+/* Bouton d'envoi */
+.submit-button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: none;
+    border-radius: 0.5rem;
+    font-size: var(--font-size-md);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.submit-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 217, 217, 0.3);
+}
+
+/* Informations de contact */
+.contact-info {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: var(--spacing-md);
+    border-radius: 1rem;
+}
+
+.contact-info h3 {
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-lg);
+}
+
+.info-item {
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-sm);
+}
+
+.info-item strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--primary-color);
+}
+
+.info-item a {
+    color: var(--text-light);
+    transition: color var(--transition-speed);
+}
+
+.info-item a:hover {
+    color: var(--primary-color);
+}
+
+/* ==========================================
+   FOOTER
+   Pied de page
+   ========================================== */
+.footer {
+    background-color: #0D0D0D;
+    color: var(--text-light);
+    text-align: center;
+    padding: var(--spacing-md) 0;
+    font-size: var(--font-size-sm);
+}
+
+.footer a {
+    color: var(--primary-color);
+}
+
+.footer p {
+    margin: 0.25rem 0;
+}
+
+/* ==========================================
+   MEDIA QUERIES (Responsive Design)
+   Adaptations pour tablettes et mobiles
+   ========================================== */
+
+/* Tablettes (écrans < 1024px) */
+@media (max-width: 1024px) {
+    .hero-content {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        text-align: center;
+    }
+    
+    .hero-image {
+        order: -1; /* Image en premier sur mobile */
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .profile-circle {
+        margin: 0 auto;
+    }
+    
+    .skills-grid {
+        grid-template-columns: 1fr; /* Une colonne */
+    }
+    
+    .timeline-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobiles (écrans < 768px) */
+@media (max-width: 768px) {
+    /* Ajustements des tailles de police */
+    :root {
+        --font-size-xxl: 1.75rem;
+        --font-size-xl: 1.5rem;
+        --font-size-lg: 1.25rem;
+    }
+    
+    /* Menu hamburger visible */
+    .nav-menu {
+        position: fixed;
+        top: 4rem;
+        left: -100%; /* Caché hors écran */
+        width: 100%;
+        height: calc(100vh - 4rem);
+        background-color: var(--bg-dark);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: var(--spacing-md);
+        transition: left var(--transition-speed);
+    }
+    
+    .nav-menu.active {
+        left: 0; /* Affiche le menu */
+    }
+    
+    .hamburger {
+        display: flex; /* Affiche le bouton hamburger */
+    }
+    
+    /* Animation du hamburger en X */
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(0.4rem, 0.4rem);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(0.4rem, -0.4rem);
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr; /* Une colonne pour formulaire */
+    }
+    
+    .profile-circle {
+        width: 15rem;
+        height: 15rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr; /* Une carte par ligne */
+    }
+}
+
+/* Petits mobiles (écrans < 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .hero-section {
+        padding: calc(var(--spacing-lg) + 3rem) 0 var(--spacing-lg) 0;
+    }
+    
+    .profile-circle {
+        width: 12rem;
+        height: 12rem;
+    }
+}
+
+/* ==========================================
+   ANIMATIONS & UTILITIES
+   Classes utilitaires et animations
+   ========================================== */
+
+/* Animation de fade-in au scroll (peut être utilisée avec JS jai decouvert cela lors de mes recherches ) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Classe pour cacher des éléments */
+.hidden {
+    display: none !important;
+}
+
+/* Classe pour accessibilité (screen readers) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}

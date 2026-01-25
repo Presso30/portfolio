@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de TOTON Peniel-Prestige - Data Analyst | Junior Data Scientist | Étudiant en IA & Big Data">
+    <title>TOTON Peniel-Prestige (Presso) - Portfolio Data Science & IA</title>
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico"> -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">  
+    
+
+    
+    <!-- Lien vers le fichier CSS externe -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ========================================
+         NAVIGATION (Menu fixe en haut)
+         Permet de naviguer entre les sections
+    ======================================== -->
+    <nav class="navbar">
+        <div class="container">
+            <!-- Logo/Nom à gauche -->
+            <div class="logo">
+                <span class="nom">TOTON</span>
+                <span class="prenom">♦ Peniel-Prestige</span>
+            </div>
+            
+            <!-- Menu de navigation à droite -->
+            <ul class="nav-menu">
+                <li><a href="#accueil" class="nav-link">Accueil</a></li>
+                <li><a href="#apropos" class="nav-link">À propos</a></li>
+                <li><a href="#projets" class="nav-link">Projets</a></li>
+                <li><a href="#competences" class="nav-link">Compétences</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <!-- Bouton hamburger pour mobile (visible uniquement sur petits écrans) -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========================================
+         SECTION ACCUEIL (Hero Section)
+         Première impression avec photo et accroche
+    ======================================== -->
+    <section id="accueil" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <!-- Texte de présentation à gauche -->
+                <div class="hero-text">
+                    <h1>Je suis <span class="highlight">TOTON Peniel-Prestige</span>, Data Analyst & Junior Data Scientist passionné par l'IA  !</h1>
+                    <p class="hero-subtitle">Passionné par l'analyse de données et l'intelligence artificielle, je transforme les données en décisions utiles.</p>
+                    <a href="#projets" class="cta-button">Voici quelques un de mes projets</a>
+                </div>
+                
+                <!-- Image/Illustration à droite -->
+                <div class="hero-image">
+                    <img src="data-illustration.svg" alt="Illustration Data Science" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION À PROPOS
+         Présentation détaillée du profil
+    ======================================== -->
+    <section id="apropos" class="about-section">
+        <div class="container">
+            <h2 class="section-title">À propos</h2>
+            
+            <div class="about-content">
+                <!-- Photo professionnelle -->
+                <div class="about-image">
+                    <div class="profile-circle">
+                        <img src="profile-photo.jpg" alt="Photo de Peniel- TOTON" />
+                    </div>
+                </div>
+                
+                <!-- Texte de présentation -->
+                <div class="about-text">
+                    <p>Je m'appelle <strong>Peniel-Prestige TOTON</strong>, passionné par la création de solutions data-driven et innovantes.</p>
+
+                    <p>Je suis actuellement titulaire d'un <strong>Master 1 Intelligence Artificielle & Big Data</strong>, avec une licence en <strong>Économétrie et Statistiques Appliquées</strong> (FASEG/UAC – 2023).</p>
+                    <p>Je cherche à mettre mes compétences au service de projets concrets en analyse de données, intelligence artificielle et systèmes décisionnels.</p>
+                    
+                    <p>Mes domaines d'intérêt incluent :</p>
+                    <ul class="interest-list">
+                        <li>📊 Analyse de données et visualisation</li>
+                        <li>🤖 Intelligence Artificielle appliquée</li>
+                        <li>💾 Bases de données et requêtes SQL</li>
+                        <li>⚽ Données sportives et modèles prédictifs</li>
+                        <li>🎙️ Traitement du signal et reconnaissance vocale (ASR)</li>
+                        <li>📱 Développement d'applications web et mobile</li>
+                    </ul>
+                    
+                    <p>Mon expérience terrain et académique est orientée vers la <strong>résolution de problèmes réels</strong> à travers l'analyse de données et le machine learning.</p>
+                    
+                    <!-- Bouton de téléchargement du CV -->
+                    <a href="#contact" class="download-cv" > Discutons de votre projet ou opportunité </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION PROJETS
+         Vitrine des projets data science et IA
+    ======================================== -->
+    <section id="projets" class="projects-section">
+        <div class="container">
+            <h2 class="section-title">Mes Projets</h2>
+            
+            <div class="projects-grid">
+                <!-- Projet 1 : Analyse Football -->
+                <div class="project-card">
+                    <div class="project-icon">📊</div>
+                    <h3>Analyse de Matchs de Football</h3>
+                    <p>Un mini-jeu interactif en JavaScript qui utilise des événements DOM.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">Matplotlib</span>
+                        <span class="tag">Analyse Stat</span>
+                    </div>
+                    <p class="project-description">
+                        Notebook Python pour l'analyse statistique des matchs de football. Sélection d'événements fiables (corners, cartons, buts) pour aide à la décision dans les paris sportifs sécurisés. Utilisation de données historiques pour identifier les patterns récurrents.
+                    </p>
+                    <a href="#" class="project-link">Voir →</a>
+                </div>
+
+                <!-- Projet 2 : Kaggle Calories -->
+                <div class="project-card">
+                    <div class="project-icon">🧠</div>
+                    <h3>Kaggle – Calories Burned Prediction</h3>
+                    <p>Un mini-jeu interactif en JavaScript qui utilise des événements DOM.</p>
+                    <div class="project-tags">
+                        <span class="tag">Kaggle</span>
+                        <span class="tag">Régression</span>
+                        <span class="tag">Feature Engineering</span>
+                        <span class="tag">ML</span>
+                    </div>
+                    <p class="project-description">
+                        Participation au Playground Series de Kaggle. Nettoyage et exploration de données, feature engineering avancé, création de modèles de régression (Linear, Ridge, Random Forest, XGBoost) pour prédire les calories brûlées. Amélioration progressive du score par optimisation des hyperparamètres.
+                    </p>
+                    <a href="#" class="project-link">Voir →</a>
+                </div>
+
+                <!-- Projet 3 : Zindi Fraud -->
+                <div class="project-card">
+                    <div class="project-icon">⚡</div>
+                    <h3>Zindi – Fraud Detection (Électricité & Gaz)</h3>
+                    <p>Un mini-jeu interactif en JavaScript qui utilise des événements DOM.</p>
+                    <div class="project-tags">
+                        <span class="tag">Zindi</span>
+                        <span class="tag">Classification</span>
+                        <span class="tag">Fraude</span>
+                        <span class="tag">Preprocessing</span>
+                    </div>
+                    <p class="project-description">
+                        Découverte de la data science appliquée à un cas métier réel. Détection de fraudes dans la consommation d'électricité et de gaz. Prétraitement des données déséquilibrées, gestion des valeurs manquantes, modèles de classification (Logistic Regression, Random Forest) avec techniques de resampling (SMOTE).
+                    </p>
+                    <a href="#" class="project-link">Voir →</a>
+                </div>
+                
+                <!-- Projet 5 : Chiffrement Hill -->
+                <div class="project-card">
+                    <div class="project-icon">🔐</div>
+                    <h3>Application de Chiffrement (Matrice de Hill)</h3>
+                    <p>Un mini-jeu interactif en JavaScript qui utilise des événements DOM et permet l'envoi de messages chiffrés.</p>
+                    <div class="project-tags">
+                        <span class="tag">Cryptographie</span>
+                        <span class="tag">Mobile App</span>
+                        <span class="tag">Sécurité</span>
+                    </div>
+                    <p class="project-description">
+                        Application mobile/web de chiffrement basée sur l'algorithme de la matrice de Hill. Fonctionnalités : chiffrement/déchiffrement de messages, générateur de clés aléatoires, interface intuitive. Développée pour une accessibilité mobile. Options premium pour fonctionnalités avancées.Mais reste quelques bugs à corriger.
+                    </p>
+                    <a href="#" class="project-link">Voir →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION COMPÉTENCES
+         Division en Soft Skills et Hard Skills
+    ======================================== -->
+    <section id="competences" class="skills-section">
+        <div class="container">
+            <h2 class="section-title">Mes Compétences</h2>
+            
+            <div class="skills-grid">
+                <!-- Soft Skills -->
+                <div class="skills-category">
+                    <h3 class="skills-subtitle">Soft Skills</h3>
+                    
+                    <!-- Gestion de projet -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Gestion de projet</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="85"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Résolution de problèmes -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Résolution de problèmes</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="90"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Adaptabilité -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Adaptabilité</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="98"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Travail d'équipe -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Travail d'équipe</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="90"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hard Skills -->
+                <div class="skills-category">
+                    <h3 class="skills-subtitle">Hard Skills</h3>
+                    
+                    <!-- Python & Data Science -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Python (Pandas, NumPy, Scikit-learn)</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="85"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Machine Learning -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Machine Learning (Régression, Classification)</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="75"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- SQL -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">SQL (MySQL, SQL Server)</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="70"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Web Dev -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">HTML, CSS, JavaScript</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="70"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Data Viz -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Visualisation (Matplotlib, Seaborn)</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="82"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- NLP & ASR -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">NLP & Traitement du Signal Audio</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="65"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technologies & Outils supplémentaires -->
+            <div class="tools-section">
+                <h3 class="skills-subtitle" style="text-align: center; margin-top: 3rem;">Outils & Plateformes</h3>
+                <div class="tools-grid">
+                    <div class="tool-badge">Jupyter Notebook</div>
+                    <div class="tool-badge">Google Colab</div>
+                    <div class="tool-badge">VS Code</div>
+                    <div class="tool-badge">Git & GitHub</div>
+                    <div class="tool-badge">Kaggle</div>
+                    <div class="tool-badge">Zindi</div>
+                    <div class="tool-badge">Stata </div>
+                    <div class="tool-badge">Excel & sheet </div>
+                    <div class="tool-badge">Eviews</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION EXPÉRIENCES & FORMATION
+         Parcours professionnel et académique
+    ======================================== -->
+    <section id="experience" class="experience-section">
+        <div class="container">
+            <h2 class="section-title">Expériences & Formation</h2>
+            
+            <div class="timeline-grid">
+                <!-- Colonne Expériences -->
+                <div class="timeline-column">
+                    <h3 class="timeline-title">💼 Expériences</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Depuis 2022</div>
+                        <h4>Freelance Junior Data Scientist</h4>
+                        <p>Analyse de données, création de modèles prédictifs, projets sur Kaggle et Zindi</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024</div>
+                        <h4>Stage – Direction Générale du Trésor et de la Comptabilité Publique</h4>
+                        <p>Traitement et analyse de données financières publiques</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2019 – 2020</div>
+                        <h4>Assistant Responsable – FASEG/BUE</h4>
+                        <p>Gestion administrative et support aux étudiants</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2021</div>
+                        <h4>Agent de Terrain – Calavi</h4>
+                        <p>Collecte et vérification de données sur le terrain</p>
+                    </div>
+                </div>
+
+                <!-- Colonne Formation -->
+                <div class="timeline-column">
+                    <h3 class="timeline-title">🎓 Formation</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">En cours</div>
+                        <h4>Master 1 Intelligence Artificielle & Big Data</h4>
+                        <p>Spécialisation en IA, Machine Learning, Big Data et traitement du signal</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023</div>
+                        <h4>Licence Économétrie & Statistiques Appliquées</h4>
+                        <p>FASEG/UAC – Analyse statistique et modélisation économétrique</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Certifications</div>
+                        <h4>Formations en Ligne</h4>
+                        <ul class="cert-list">
+                            <li>FreeCodeCamp – Data Analysis with Python</li>
+                            <li>CodeSignal – SQL Fundamentals</li>
+                            <li>Developpeur web debutant de Dclic</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION HOBBIES & ACTIVITÉS
+         Centres d'intérêt personnels
+    ======================================== -->
+    <section id="hobbies" class="hobbies-section">
+        <div class="container">
+            <h2 class="section-title">Hobbies & Activités</h2>
+            
+            <div class="hobbies-grid">
+                <div class="hobby-card">
+                    <div class="hobby-icon">⚽</div>
+                    <h4>Analyse Sportive</h4>
+                    <p>Passion pour l'analyse de données sportives et les statistiques de football</p>
+                </div>
+                
+                <div class="hobby-card">
+                    <div class="hobby-icon">₿</div>
+                    <h4>Crypto & Blockchain</h4>
+                    <p>Intérêt pour les technologies blockchain et les cryptomonnaies</p>
+                </div>
+                
+                <div class="hobby-card">
+                    <div class="hobby-icon">💼</div>
+                    <h4>Entrepreneuriat</h4>
+                    <p>Bénévolat dans le commerce familial et projets personnels</p>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">🤝</div>
+                    <h4>Culture mangas</h4>
+                    <p>Passion pour la culture japonaise et les mangas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION CONTACT
+         Formulaire de contact avec validation
+    ======================================== -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-header">
+                <h2>Vous avez un <span class="highlight">projet en tête</span> ?</h2>
+                <p>N'hésitez pas à me <span class="highlight">contacter</span></p>
+            </div>
+            
+            <div class="contact-content">
+                <!-- Formulaire -->
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="nom" name="nom" placeholder="Nom prénom" required>
+                            <span class="error-message"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Votre email" required>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" id="sujet" name="sujet" placeholder="Sujet" required>
+                        <span class="error-message"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="6" placeholder="Votre message" required></textarea>
+                        <span class="error-message"></span>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Envoyer</button>
+                </form>
+
+                <!-- Informations de contact -->
+                <div class="contact-info">
+                    <h3>Informations de contact</h3>
+                    <div class="info-item">
+                        <strong>📧 Email :</strong>
+                        <a href="mailto:penieltoton51@gmail.com">penieltoton51@gmail.com</a>
+                    </div>
+                    <div class="info-item">
+                        <strong>📱 Téléphone :</strong>
+                        <a href="tel:+22901471670">+229 01 47 16 70 62</a>
+                    </div>
+                    <div class="info-item">
+                        <strong>📍 Localisation :</strong>
+                        <span>Abomey-Calavi, Bénin</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>💼 LinkedIn :</strong>
+                        <a href="https://www.linkedin.com/in/peniel-toton-423a27295" target="_blank">Peniel Toton</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         Pied de page avec copyright
+    ======================================== -->
+    <footer class="footer">
+        <div class="container">
+            <p>Designed by <a href="#accueil">Peniel-Prestige</a> with HTML, CSS, JS</p>
+            <p>Tous droits réservés © 2026</p>
+        </div>
+    </footer>  
+     <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <script>
+        (function(){
+             emailjs.init("MPIGnT1kXc48OD8Kh");
+     })();
+    </script>
+    
+
+    <!-- Lien vers le fichier JavaScript externe -->
+    <script src="script.js"></script>
+</body>
+</html>
