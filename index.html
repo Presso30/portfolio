@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio de TOTON Peniel-Prestige - Data Analyst | Junior Data Scientist | Étudiant en IA & Big Data">
-    <title>TOTON Peniel-Prestige (Presso) - Portfolio Data Science & IA</title>
+    <meta name="description" content="Portfolio de TOTON Peniel-Prestige - Data Analyst | Junior Data Scientist | IA & Big Data">
+    <title>TOTON Peniel-Prestige (Presso) - Portfolio Data & IA</title>
     <!-- <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico"> -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">  
-    
 
-    
+    <!-- Polices -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
     <!-- Lien vers le fichier CSS externe -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260214">
 </head>
 <body>
     <!-- ========================================
@@ -31,6 +34,7 @@
                 <li><a href="#accueil" class="nav-link">Accueil</a></li>
                 <li><a href="#apropos" class="nav-link">À propos</a></li>
                 <li><a href="#projets" class="nav-link">Projets</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="#competences" class="nav-link">Compétences</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
@@ -53,9 +57,9 @@
             <div class="hero-content">
                 <!-- Texte de présentation à gauche -->
                 <div class="hero-text">
-                    <h1>Je suis <span class="highlight">TOTON Peniel-Prestige</span>, Data Analyst & Junior Data Scientist passionné par l'IA  !</h1>
-                    <p class="hero-subtitle">Passionné par l'analyse de données et l'intelligence artificielle, je transforme les données en décisions utiles.</p>
-                    <a href="#projets" class="cta-button">Voici quelques un de mes projets</a>
+                    <h1>Je suis <span class="highlight">TOTON Peniel-Prestige</span>, Data Analyst & Junior Data Scientist orienté IA.</h1>
+                    <p class="hero-subtitle">J’analyse, structure et valorise les données pour produire des insights clairs et des décisions utiles.</p>
+                    <a href="#projets" class="cta-button">Découvrir mes projets</a>
                 </div>
                 
                 <!-- Image/Illustration à droite -->
@@ -84,25 +88,26 @@
                 
                 <!-- Texte de présentation -->
                 <div class="about-text">
-                    <p>Je m'appelle <strong>Peniel-Prestige TOTON</strong>, passionné par la création de solutions data-driven et innovantes.</p>
+                    <p>Je m'appelle <strong>Peniel-Prestige TOTON</strong> et je conçois des solutions data‑driven pour répondre à des problématiques métiers concrètes.</p>
 
-                    <p>Je suis actuellement titulaire d'un <strong>Master 1 Intelligence Artificielle & Big Data</strong>, avec une licence en <strong>Économétrie et Statistiques Appliquées</strong> (FASEG/UAC – 2023).</p>
-                    <p>Je cherche à mettre mes compétences au service de projets concrets en analyse de données, intelligence artificielle et systèmes décisionnels.</p>
+                    <p>Master 1 <strong>Intelligence Artificielle & Big Data</strong> terminé (2025), après une licence en <strong>Économétrie et Statistiques Appliquées</strong> (FASEG/UAC – 2023).</p>
+                    <p>Mon objectif : transformer des données complexes en résultats mesurables via l’analyse, la modélisation et la visualisation.</p>
                     
                     <p>Mes domaines d'intérêt incluent :</p>
                     <ul class="interest-list">
-                        <li>📊 Analyse de données et visualisation</li>
-                        <li>🤖 Intelligence Artificielle appliquée</li>
-                        <li>💾 Bases de données et requêtes SQL</li>
-                        <li>⚽ Données sportives et modèles prédictifs</li>
-                        <li>🎙️ Traitement du signal et reconnaissance vocale (ASR)</li>
-                        <li>📱 Développement d'applications web et mobile</li>
+                        <li>Analyse de données et visualisation</li>
+                        <li>Intelligence artificielle appliquée</li>
+                        <li>Bases de données et requêtes SQL</li>
+                        <li>Données sportives et modèles prédictifs</li>
+                        <li>Traitement du signal et reconnaissance vocale (ASR)</li>
+                        <li>Développement d'applications web et mobile</li>
                     </ul>
                     
-                    <p>Mon expérience terrain et académique est orientée vers la <strong>résolution de problèmes réels</strong> à travers l'analyse de données et le machine learning.</p>
+                    <p>Mon expérience terrain et académique est orientée vers la <strong>résolution de problèmes réels</strong> grâce à l’analyse de données et au machine learning.</p>
                     
                     <!-- Bouton de téléchargement du CV -->
-                    <a href="#contact" class="download-cv" > Discutons de votre projet ou opportunité </a>
+                    <a href="cv.html" class="download-cv">Visualiser mon CV</a>
+                    <a href="#contact" class="download-cv" style="margin-left: 0.75rem;">Discutons de votre projet</a>
                 </div>
             </div>
         </div>
@@ -116,74 +121,223 @@
         <div class="container">
             <h2 class="section-title">Mes Projets</h2>
             
-            <div class="projects-grid">
-                <!-- Projet 1 : Analyse Football -->
-                <div class="project-card">
-                    <div class="project-icon">📊</div>
-                    <h3>Analyse de Matchs de Football</h3>
-                    <p>Un mini-jeu interactif en JavaScript qui utilise des événements DOM.</p>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Pandas</span>
-                        <span class="tag">Matplotlib</span>
-                        <span class="tag">Analyse Stat</span>
+            <div class="projects-category">
+                <h3 class="project-category">Data & Analytics</h3>
+                <div class="projects-grid">
+                    <!-- Projet 1 : Analyse Football -->
+                    <div class="project-card">
+                        <div class="project-icon">📊</div>
+                        <h3>Analyse de Matchs de Football</h3>
+                        <p>Analyse statistique appliquée au football pour extraire des signaux fiables.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">Matplotlib</span>
+                            <span class="tag">Analyse Stat</span>
+                        </div>
+                        <p class="project-description">
+                            Notebook Python dédié à l’analyse des matchs : identification d’événements prédictifs, exploration des données historiques et mise en évidence de patterns récurrents pour la prise de décision.
+                        </p>
+                        <a href="#" class="project-link">Voir →</a>
                     </div>
-                    <p class="project-description">
-                        Notebook Python pour l'analyse statistique des matchs de football. Sélection d'événements fiables (corners, cartons, buts) pour aide à la décision dans les paris sportifs sécurisés. Utilisation de données historiques pour identifier les patterns récurrents.
-                    </p>
-                    <a href="#" class="project-link">Voir →</a>
-                </div>
 
-                <!-- Projet 2 : Kaggle Calories -->
-                <div class="project-card">
-                    <div class="project-icon">🧠</div>
-                    <h3>Kaggle – Calories Burned Prediction</h3>
-                    <p>Un mini-jeu interactif en JavaScript qui utilise des événements DOM.</p>
-                    <div class="project-tags">
-                        <span class="tag">Kaggle</span>
-                        <span class="tag">Régression</span>
-                        <span class="tag">Feature Engineering</span>
-                        <span class="tag">ML</span>
+                    <!-- Projet 2 : Kaggle Calories -->
+                    <div class="project-card">
+                        <div class="project-icon">🧠</div>
+                        <h3>Kaggle – Calories Burned Prediction</h3>
+                        <p>Modèle de prédiction des calories avec feature engineering avancé.</p>
+                        <div class="project-tags">
+                            <span class="tag">Kaggle</span>
+                            <span class="tag">Régression</span>
+                            <span class="tag">Feature Engineering</span>
+                            <span class="tag">ML</span>
+                        </div>
+                        <p class="project-description">
+                            Participation au Playground Series : nettoyage, exploration, feature engineering et entraînement de modèles (Linear, Ridge, Random Forest, XGBoost) avec optimisation d’hyperparamètres.
+                        </p>
+                        <a href="#" class="project-link">Voir →</a>
                     </div>
-                    <p class="project-description">
-                        Participation au Playground Series de Kaggle. Nettoyage et exploration de données, feature engineering avancé, création de modèles de régression (Linear, Ridge, Random Forest, XGBoost) pour prédire les calories brûlées. Amélioration progressive du score par optimisation des hyperparamètres.
-                    </p>
-                    <a href="#" class="project-link">Voir →</a>
-                </div>
 
-                <!-- Projet 3 : Zindi Fraud -->
-                <div class="project-card">
-                    <div class="project-icon">⚡</div>
-                    <h3>Zindi – Fraud Detection (Électricité & Gaz)</h3>
-                    <p>Un mini-jeu interactif en JavaScript qui utilise des événements DOM.</p>
-                    <div class="project-tags">
-                        <span class="tag">Zindi</span>
-                        <span class="tag">Classification</span>
-                        <span class="tag">Fraude</span>
-                        <span class="tag">Preprocessing</span>
+                    <!-- Projet 3 : Zindi Fraud -->
+                    <div class="project-card">
+                        <div class="project-icon">⚡</div>
+                        <h3>Zindi – Fraud Detection (Électricité & Gaz)</h3>
+                        <p>Détection de fraude sur données énergétiques.</p>
+                        <div class="project-tags">
+                            <span class="tag">Zindi</span>
+                            <span class="tag">Classification</span>
+                            <span class="tag">Fraude</span>
+                            <span class="tag">Preprocessing</span>
+                        </div>
+                        <p class="project-description">
+                            Détection de fraudes dans la consommation d’électricité et de gaz : préparation des données, gestion du déséquilibre, modèles de classification (Logistic Regression, Random Forest) et resampling (SMOTE).
+                        </p>
+                        <a href="#" class="project-link">Voir →</a>
                     </div>
-                    <p class="project-description">
-                        Découverte de la data science appliquée à un cas métier réel. Détection de fraudes dans la consommation d'électricité et de gaz. Prétraitement des données déséquilibrées, gestion des valeurs manquantes, modèles de classification (Logistic Regression, Random Forest) avec techniques de resampling (SMOTE).
-                    </p>
-                    <a href="#" class="project-link">Voir →</a>
-                </div>
-                
-                <!-- Projet 5 : Chiffrement Hill -->
-                <div class="project-card">
-                    <div class="project-icon">🔐</div>
-                    <h3>Application de Chiffrement (Matrice de Hill)</h3>
-                    <p>Un mini-jeu interactif en JavaScript qui utilise des événements DOM et permet l'envoi de messages chiffrés.</p>
-                    <div class="project-tags">
-                        <span class="tag">Cryptographie</span>
-                        <span class="tag">Mobile App</span>
-                        <span class="tag">Sécurité</span>
-                    </div>
-                    <p class="project-description">
-                        Application mobile/web de chiffrement basée sur l'algorithme de la matrice de Hill. Fonctionnalités : chiffrement/déchiffrement de messages, générateur de clés aléatoires, interface intuitive. Développée pour une accessibilité mobile. Options premium pour fonctionnalités avancées.Mais reste quelques bugs à corriger.
-                    </p>
-                    <a href="#" class="project-link">Voir →</a>
                 </div>
             </div>
+
+            <div class="projects-category">
+                <h3 class="project-category">IA & Deep Learning</h3>
+                <div class="projects-grid">
+                    <!-- Projet 6 : ASR / TALN -->
+                    <div class="project-card">
+                        <div class="project-icon">🎙️</div>
+                        <h3>ASR — Transcription de voix (TALN)</h3>
+                        <p>Création de modèles de transcription automatique de la parole.</p>
+                        <div class="project-tags">
+                            <span class="tag">NLP</span>
+                            <span class="tag">ASR</span>
+                            <span class="tag">Audio</span>
+                            <span class="tag">Deep Learning</span>
+                        </div>
+                        <p class="project-description">
+                            Prétraitement audio, préparation des jeux de données et entraînement de modèles pour la transcription de voix.
+                        </p>
+                        <a href="#" class="project-link">Voir →</a>
+                    </div>
+
+                    <!-- Projet 7 : CNN / RNN -->
+                    <div class="project-card">
+                        <div class="project-icon">🧩</div>
+                        <h3>Modèles CNN & RNN</h3>
+                        <p>Entraînement de réseaux de neurones pour classification et séquences.</p>
+                        <div class="project-tags">
+                            <span class="tag">CNN</span>
+                            <span class="tag">RNN</span>
+                            <span class="tag">Deep Learning</span>
+                        </div>
+                        <p class="project-description">
+                            Expérimentations sur des architectures CNN/RNN, réglages d'hyperparamètres et évaluation des performances.
+                        </p>
+                        <a href="#" class="project-link">Voir →</a>
+                    </div>
+
+                    <!-- Projet 8 : Q-Learning -->
+                    <div class="project-card">
+                        <div class="project-icon">🎯</div>
+                        <h3>Apprentissage par renforcement — Q-Learning</h3>
+                        <p>Implémentation d'un agent Q-learning sur un environnement simple.</p>
+                        <div class="project-tags">
+                            <span class="tag">RL</span>
+                            <span class="tag">Q-Learning</span>
+                            <span class="tag">Python</span>
+                        </div>
+                        <p class="project-description">
+                            Définition de l'environnement, stratégie d'exploration/exploitation et analyse de la convergence.
+                        </p>
+                        <a href="#" class="project-link">Voir →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="projects-category">
+                <h3 class="project-category">Apps & Sécurité</h3>
+                <div class="projects-grid">
+                    <!-- Projet 5 : Chiffrement Hill -->
+                    <div class="project-card">
+                        <div class="project-icon">🔐</div>
+                        <h3>Application de Chiffrement (Matrice de Hill)</h3>
+                        <p>Application de chiffrement/déchiffrement basée sur la matrice de Hill.</p>
+                        <div class="project-tags">
+                            <span class="tag">Cryptographie</span>
+                            <span class="tag">Mobile App</span>
+                            <span class="tag">Sécurité</span>
+                        </div>
+                        <p class="project-description">
+                            Application mobile/web de chiffrement : génération de clés, chiffrement/déchiffrement, interface mobile‑friendly. Améliorations en cours sur la robustesse et l’ergonomie.
+                        </p>
+                        <a href="#" class="project-link">Voir →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION SERVICES
+         Offre de services data & IA
+    ======================================== -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="section-title">Offre de Services</h2>
+            <p class="section-lead">
+                J'accompagne étudiants, particuliers et petites structures sur des missions data et IA,
+                du nettoyage de données à l'entraînement de modèles.
+            </p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Analyse de données & reporting</h3>
+                    <p>Nettoyage, exploration, statistiques descriptives et synthèses claires pour vos décisions.</p>
+                    <ul class="service-list">
+                        <li>Nettoyage et structuration de datasets</li>
+                        <li>Analyses exploratoires (EDA)</li>
+                        <li>Rapports et interprétations</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Visualisation & tableaux de bord</h3>
+                    <p>Graphiques lisibles et tableaux de bord pour suivre vos indicateurs.</p>
+                    <ul class="service-list">
+                        <li>Matplotlib / Seaborn</li>
+                        <li>Tableaux de bord simples</li>
+                        <li>KPIs et suivi de performance</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>SQL & bases de données</h3>
+                    <p>Requêtes SQL, création de tables, optimisation basique et organisation des données.</p>
+                    <ul class="service-list">
+                        <li>SQL Server, MySQL</li>
+                        <li>Requêtes analytiques</li>
+                        <li>Structuration et normalisation</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Machine Learning appliqué</h3>
+                    <p>Modèles de régression, classification et évaluation pour des cas concrets.</p>
+                    <ul class="service-list">
+                        <li>Feature engineering</li>
+                        <li>Modèles supervisés (scikit-learn)</li>
+                        <li>Évaluation et amélioration</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Automatisation de tâches</h3>
+                    <p>Automatiser des tâches répétitives pour gagner du temps et réduire les erreurs.</p>
+                    <ul class="service-list">
+                        <li>Scripts Python & Excel</li>
+                        <li>Traitements récurrents de fichiers</li>
+                        <li>Rapports automatiques</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Analyse pour projets académiques</h3>
+                    <p>Support technique pour l'analyse de données et les tests statistiques.</p>
+                    <ul class="service-list">
+                        <li>Prétraitement et traitement des données</li>
+                        <li>Tests statistiques et interprétation</li>
+                        <li>Validation des résultats</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Prototypage d'idées data</h3>
+                    <p>Transformer une idée en prototype simple (MVP) autour de la donnée.</p>
+                    <ul class="service-list">
+                        <li>Cadrage fonctionnel</li>
+                        <li>Prototype rapide</li>
+                        <li>Conseils pour mise en production</li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -337,7 +491,7 @@
             <div class="timeline-grid">
                 <!-- Colonne Expériences -->
                 <div class="timeline-column">
-                    <h3 class="timeline-title">💼 Expériences</h3>
+                    <h3 class="timeline-title">Expériences</h3>
                     
                     <div class="timeline-item">
                         <div class="timeline-date">Depuis 2022</div>
@@ -366,11 +520,11 @@
 
                 <!-- Colonne Formation -->
                 <div class="timeline-column">
-                    <h3 class="timeline-title">🎓 Formation</h3>
+                    <h3 class="timeline-title">Formation</h3>
                     
                     <div class="timeline-item">
-                        <div class="timeline-date">En cours</div>
-                        <h4>Master 1 Intelligence Artificielle & Big Data</h4>
+                        <div class="timeline-date">2025</div>
+                        <h4>Master 1 Intelligence Artificielle & Big Data (terminé)</h4>
                         <p>Spécialisation en IA, Machine Learning, Big Data et traitement du signal</p>
                     </div>
                     
@@ -386,7 +540,7 @@
                         <ul class="cert-list">
                             <li>FreeCodeCamp – Data Analysis with Python</li>
                             <li>CodeSignal – SQL Fundamentals</li>
-                            <li>Developpeur web debutant de Dclic</li>
+                            <li>Développeur web débutant (Dclic)</li>
                         </ul>
                     </div>
                 </div>
@@ -404,24 +558,24 @@
             
             <div class="hobbies-grid">
                 <div class="hobby-card">
-                    <div class="hobby-icon">⚽</div>
+                    <div class="hobby-icon">Analyse sportive</div>
                     <h4>Analyse Sportive</h4>
                     <p>Passion pour l'analyse de données sportives et les statistiques de football</p>
                 </div>
                 
                 <div class="hobby-card">
-                    <div class="hobby-icon">₿</div>
+                    <div class="hobby-icon">Crypto & blockchain</div>
                     <h4>Crypto & Blockchain</h4>
                     <p>Intérêt pour les technologies blockchain et les cryptomonnaies</p>
                 </div>
                 
                 <div class="hobby-card">
-                    <div class="hobby-icon">💼</div>
+                    <div class="hobby-icon">Entrepreneuriat</div>
                     <h4>Entrepreneuriat</h4>
                     <p>Bénévolat dans le commerce familial et projets personnels</p>
                 </div>
                 <div class="hobby-card">
-                    <div class="hobby-icon">🤝</div>
+                    <div class="hobby-icon">Culture mangas</div>
                     <h4>Culture mangas</h4>
                     <p>Passion pour la culture japonaise et les mangas</p>
                 </div>
@@ -477,7 +631,18 @@
                     </div>
                     <div class="info-item">
                         <strong>📱 Téléphone :</strong>
-                        <a href="tel:+22901471670">+229 01 47 16 70 62</a>
+                        <a href="tel:+2290147167062">+229 01 47 16 70 62</a>
+                    </div>
+                    <div class="info-item">
+                        <strong>WhatsApp :</strong>
+                        <a class="whatsapp-link" href="https://wa.me/2290147167062" target="_blank" rel="noopener">
+                            <span class="icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="18" height="18" focusable="false" aria-hidden="true">
+                                    <path fill="currentColor" d="M20.5 3.5A11 11 0 0 0 3.1 17.1L2 22l5-1.3A11 11 0 1 0 20.5 3.5Zm-8.5 17a9 9 0 0 1-4.6-1.2l-.3-.2-3 0.8 0.8-2.9-.2-.3A9 9 0 1 1 12 20.5Zm4.9-6.8c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.2-.8.9-1 .9-.2.1-.4.1-.7 0-1.6-.6-2.6-1.7-3-2.3-.1-.2 0-.4.1-.6l.4-.5.2-.3c.1-.1.1-.3 0-.5-.1-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5H8.2c-.2 0-.5.1-.7.3-.2.2-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3 4.9 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.6-.6 1.8-1.3.2-.6.2-1.1.1-1.3-.1-.1-.3-.2-.6-.3Z"/>
+                                </svg>
+                            </span>
+                            <span>Écrire sur WhatsApp</span>
+                        </a>
                     </div>
                     <div class="info-item">
                         <strong>📍 Localisation :</strong>
@@ -485,7 +650,7 @@
                     </div>
                     <div class="info-item">
                         <strong>💼 LinkedIn :</strong>
-                        <a href="https://www.linkedin.com/in/peniel-toton-423a27295" target="_blank">Peniel Toton</a>
+                        <a href="https://www.linkedin.com/in/peniel-toton-423a27295" target="_blank" rel="noopener">Peniel Toton</a>
                     </div>
                 </div>
             </div>
@@ -513,6 +678,6 @@
     
 
     <!-- Lien vers le fichier JavaScript externe -->
-    <script src="script.js"></script>
+    <script src="script.js?v=20260214"></script>
 </body>
 </html>

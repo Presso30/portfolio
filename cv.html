@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PENIEL TOTON (Presso) — CV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0f172a;
+            --muted: #4b5563;
+            --soft: #8aa7c2;
+            --accent: #8EC9E8;
+            --accent-dark: #6FB3D9;
+            --paper: #f6f7fb;
+            --card: #ffffff;
+            --shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Space Grotesk', system-ui, -apple-system, Segoe UI, sans-serif;
+            color: var(--ink);
+            background: radial-gradient(circle at top left, rgba(142, 201, 232, 0.22), transparent 45%),
+                        radial-gradient(circle at 85% 10%, rgba(15, 23, 42, 0.12), transparent 35%),
+                        var(--paper);
+            line-height: 1.55;
+            padding: 2.5rem 1.5rem;
+        }
+        h1, h2, h3 { font-family: 'DM Serif Display', serif; letter-spacing: 0.2px; }
+        a { color: inherit; text-decoration: none; }
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            background: var(--card);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .hero {
+            padding: 2.5rem 3rem 2rem;
+            background: linear-gradient(120deg, rgba(142, 201, 232, 0.2), rgba(255, 255, 255, 0.1)),
+                        radial-gradient(circle at 10% 20%, rgba(15, 23, 42, 0.15), transparent 55%);
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: auto 3rem -18px 3rem;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            border-radius: 999px;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .name { font-size: 2.4rem; }
+        .role { color: var(--accent-dark); font-weight: 600; margin: 0.4rem 0; }
+        .meta { color: var(--muted); font-size: 0.95rem; }
+        .contact {
+            background: rgba(15, 23, 42, 0.04);
+            border-radius: 16px;
+            padding: 1.2rem 1.4rem;
+            border: 1px solid rgba(142, 201, 232, 0.35);
+        }
+        .contact p { margin-bottom: 0.45rem; font-size: 0.95rem; }
+        .contact p:last-child { margin-bottom: 0; }
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            gap: 2.5rem;
+            padding: 2.5rem 3rem 3rem;
+        }
+        .section { margin-bottom: 2rem; }
+        .section h2 {
+            font-size: 1.2rem;
+            color: var(--ink);
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 36px;
+            height: 3px;
+            margin-top: 0.35rem;
+            background: var(--accent);
+            border-radius: 999px;
+        }
+        .lead { color: var(--muted); font-size: 1rem; }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(142, 201, 232, 0.18);
+            color: var(--ink);
+            font-size: 0.85rem;
+            margin: 0 0.4rem 0.4rem 0;
+            border: 1px solid rgba(142, 201, 232, 0.4);
+        }
+        .timeline .item {
+            padding: 0.8rem 0 0.8rem 1rem;
+            border-left: 2px solid rgba(142, 201, 232, 0.6);
+            position: relative;
+        }
+        .timeline .item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 1.1rem;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        .item h3 { font-size: 1rem; margin-bottom: 0.2rem; }
+        .item p { color: var(--muted); font-size: 0.95rem; }
+        .list { margin-left: 1.1rem; color: var(--muted); font-size: 0.95rem; }
+        .list li { margin-bottom: 0.4rem; }
+        .badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-dark);
+            margin-bottom: 0.4rem;
+        }
+        .info-card {
+            background: rgba(142, 201, 232, 0.12);
+            border-radius: 16px;
+            padding: 1.1rem 1.2rem;
+            border: 1px solid rgba(142, 201, 232, 0.4);
+        }
+        .info-card h3 { font-size: 1rem; margin-bottom: 0.45rem; }
+        .info-card p { color: var(--muted); font-size: 0.95rem; }
+        .foot {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+            padding: 0 3rem 2rem;
+        }
+        @media (max-width: 900px) {
+            .hero-grid, .content { grid-template-columns: 1fr; }
+            .hero, .content { padding: 2rem; }
+            .hero::after { inset: auto 2rem -18px 2rem; }
+        }
+        @media print {
+            @page { margin: 14mm; }
+            body { background: white; padding: 0; }
+            .page { box-shadow: none; border-radius: 0; }
+            .hero { background: white; }
+            .hero::after { display: none; }
+            .content { grid-template-columns: 1fr 0.95fr; gap: 2rem; }
+            h2 { break-after: avoid; page-break-after: avoid; }
+            .item, .list li { break-inside: avoid; page-break-inside: avoid; }
+            .print-break { break-before: page; page-break-before: always; }
+            .badge { color: #111827; }
+            .role { color: #111827; }
+            .meta, .lead, .item p, .list, .list li { color: #1f2937; }
+            .contact { background: white; border: 1px solid #e5e7eb; }
+            .info-card { background: white; border: 1px solid #e5e7eb; }
+            .pill { background: #f3f4f6; border-color: #e5e7eb; }
+            .section h2::after { background: #111827; }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header class="hero">
+            <div class="hero-grid">
+                <div>
+                    <div class="badge">Data & IA</div>
+                    <h1 class="name">PENIEL TOTON (Presso)</h1>
+                    <div class="role">Data Analyst | Junior Data Scientist | IA & Big Data</div>
+                    <div class="meta">Abomey-Calavi, Bénin</div>
+                    <div class="meta">Master 1 IA & Big Data terminé (2025) — Licence Économétrie & Statistiques Appliquées</div>
+                </div>
+                <div class="contact">
+                    <p><strong>Tél.</strong> +229 01 47 16 70 62</p>
+                    <p><strong>Email</strong> penieltoton51@gmail.com</p>
+                    <p><strong>Portfolio</strong> presso30.github.io/portfolio</p>
+                    <p><strong>LinkedIn</strong> www.linkedin.com/in/peniel-toton-423a27295</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="content">
+            <div>
+                <div class="section">
+                    <h2>Profil</h2>
+                    <p class="lead">
+                        Data practitioner orienté résultats, avec une base solide en économétrie et un Master 1 IA & Big Data terminé (2025).
+                        J’analyse, structure et valorise les données pour produire des insights actionnables, avec un intérêt marqué
+                        pour les bases de données, la data science et l’IA appliquée.
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2>Expérience</h2>
+                    <div class="timeline">
+                        <div class="item">
+                            <h3>Freelance — Junior Data Scientist (2018 – présent)</h3>
+                            <p>Collecte, nettoyage et structuration de données. Conception de pipelines de prétraitement, analyses exploratoires et rapports de synthèse.</p>
+                        </div>
+                        <div class="item">
+                            <h3>Stagiaire — Direction Générale du Trésor & Comptabilité Publique (2024)</h3>
+                            <p>Traitement de données financières publiques, visualisation et support aux notes d’analyse.</p>
+                        </div>
+                        <div class="item">
+                            <h3>Assistant Responsable — FASEG/BUE (2019 – 2020)</h3>
+                            <p>Coordination d’activités, collecte d’informations internes et appui administratif.</p>
+                        </div>
+                        <div class="item">
+                            <h3>Agent de terrain — Projet local (Calavi, 2021)</h3>
+                            <p>Collecte terrain, contrôle qualité et saisie des données.</p>
+                        </div>
+                        <div class="item">
+                            <h3>Commerce familial (2016 – présent)</h3>
+                            <p>Gestion opérationnelle et suivi des ventes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Projets & Compétitions</h2>
+                    <ul class="list">
+                        <li>Analyse de matchs de football : pipeline d’analyse statistique, extraction d’événements et reporting.</li>
+                        <li>Kaggle — Playground Series (calories) : feature engineering et modèles de régression.</li>
+                        <li>Zindi — Fraud Detection : préparation de données, gestion du déséquilibre, modèles de classification.</li>
+                        <li>Projet MNIST : prétraitement et classification d’images.</li>
+                        <li>Début en ASR : prétraitement audio et préparation de dataset.</li>
+                        <li>App de chiffrement (matrice de Hill) : prototype et conception fonctionnelle.</li>
+                        <li>Projet OIF : IA pour l’orientation des jeunes (cadrage en cours).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <div class="section print-break">
+                    <h2>Compétences clés</h2>
+                    <div>
+                        <span class="pill">Python (pandas, NumPy)</span>
+                        <span class="pill">SQL / SQL Server (T-SQL)</span>
+                        <span class="pill">Automatisation (Python / Excel)</span>
+                        <span class="pill">Scikit-learn</span>
+                        <span class="pill">Matplotlib / Seaborn</span>
+                        <span class="pill">EDA & Feature Engineering</span>
+                        <span class="pill">Git / GitHub</span>
+                        <span class="pill">Jupyter / Colab</span>
+                        <span class="pill">Excel avancé</span>
+                    </div>
+                    <p class="meta" style="margin-top:0.5rem;">En cours : Power BI / Tableau, NLP & ASR.</p>
+                </div>
+
+                <div class="section info-card">
+                    <h3>Formation</h3>
+                    <p><strong>Master 1 — IA & Big Data (2025)</strong><br>Pigier Bénin</p>
+                    <p style="margin-top:0.6rem;"><strong>Licence — Économétrie & Statistiques (2023)</strong><br>FASEG / UAC</p>
+                    <p style="margin-top:0.6rem;"><strong>Mémoire</strong><br>Effet du capital humain sur l’accès à l’emploi des jeunes au Bénin</p>
+                </div>
+
+                <div class="section info-card" style="margin-top:1.5rem;">
+                    <h3>Certifications</h3>
+                    <ul class="list">
+                        <li>D-CLIC — Développement Web Débutant (OIF)</li>
+                        <li>Kaggle Learn — Introduction à la programmation</li>
+                        <li>FreeCodeCamp — Parcours data & web (autonomie)</li>
+                    </ul>
+                </div>
+
+                <div class="section info-card" style="margin-top:1.5rem;">
+                    <h3>Langues & Engagements</h3>
+                    <p>Français (courant), Anglais (technique), Fon (local).</p>
+                    <ul class="list" style="margin-top:0.6rem;">
+                        <li>Membre d’association de jeunes (quartier)</li>
+                        <li>Membre de l’équipe « De Builder » (projets tech/crypto)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="foot">Références disponibles sur demande</div>
+    </main>
+</body>
+</html>

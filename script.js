@@ -3,6 +3,9 @@
 // Sélection des éléments DOM principaux
 // ========================================== 
 
+// Indique que JavaScript est actif (pour animations safe)
+document.documentElement.classList.add('js');
+
 // Éléments de navigation
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -296,7 +299,7 @@ function showSuccessMessage() {
         position: fixed;
         top: 5rem;
         right: 2rem;
-        background-color: #00D9D9;
+        background-color: var(--primary-color);
         color: white;
         padding: 1rem 2rem;
         border-radius: 0.5rem;
@@ -510,8 +513,49 @@ createBackToTopButton();
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Portfolio chargé avec succès ! 🚀');
 
-    // Vous pouvez ajouter d'autres initialisations ici
-    // Par exemple : charger des données externes, initialiser des bibliothèques, etc.
+    // Animations légères au scroll (sans casser le rendu si JS échoue)
+    const targets = document.querySelectorAll(
+        '.section-title, .project-category, .project-card, .service-card, .skill-item, .timeline-item, .hobby-card, .tool-badge, .contact-form, .contact-info, .hero-text, .hero-image'
+    );
+
+    const getAnimClass = (el) => {
+        if (el.classList.contains('hero-text')) return 'anim-rise';
+        if (el.classList.contains('hero-image')) return 'anim-right';
+        if (el.classList.contains('section-title')) return 'anim-title';
+        if (el.classList.contains('project-category')) return 'anim-category';
+        if (el.classList.contains('project-card')) return 'anim-pop';
+        if (el.classList.contains('service-card')) return 'anim-rise';
+        if (el.classList.contains('skill-item')) return 'anim-left';
+        if (el.classList.contains('timeline-item')) return 'anim-line';
+        if (el.classList.contains('hobby-card')) return 'anim-tilt';
+        if (el.classList.contains('tool-badge')) return 'anim-chip';
+        if (el.classList.contains('contact-form')) return 'anim-left';
+        if (el.classList.contains('contact-info')) return 'anim-right';
+        return 'anim-rise';
+    };
+
+    targets.forEach((el, index) => {
+        el.classList.add('anim', getAnimClass(el));
+        el.style.transitionDelay = `${(index % 6) * 60}ms`;
+    });
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+            (entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.12, rootMargin: '0px 0px -10% 0px' }
+        );
+
+        targets.forEach(el => observer.observe(el));
+    } else {
+        targets.forEach(el => el.classList.add('in-view'));
+    }
 });
 
 /**
