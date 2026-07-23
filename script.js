@@ -1,660 +1,326 @@
-// ==========================================
-// VARIABLES GLOBALES
-// Sélection des éléments DOM principaux
-// ========================================== 
+/* ═══════════════════════════════════════════════════
+   PORTFOLIO — Péniel Toton « Presso »
+   Interactions : thème, nav, reveals, canvas, formulaire
+   ═══════════════════════════════════════════════════ */
 
-// Indique que JavaScript est actif (pour animations safe)
-document.documentElement.classList.add('js');
+"use strict";
 
-// Éléments de navigation
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-const navLinks = document.querySelectorAll('.nav-link');
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// Formulaire de contact
-const contactForm = document.getElementById('contactForm');
-const formInputs = contactForm.querySelectorAll('input, textarea');
+/* ── Thème clair / sombre ─────────────────────────── */
+(function initTheme() {
+  const stored = localStorage.getItem("theme");
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme = stored || (systemDark ? "dark" : "light");
+  document.documentElement.setAttribute("data-theme", theme);
 
-// Barres de compétences (pour animation)
-const skillBars = document.querySelectorAll('.skill-progress');
+  document.getElementById("themeToggle").addEventListener("click", () => {
+    const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  });
+})();
 
-// ==========================================
-// MENU HAMBURGER (Navigation mobile)
-// Ouvre/ferme le menu sur mobile
-// ==========================================
+/* ── Navigation ───────────────────────────────────── */
+const navbar = document.getElementById("navbar");
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+const navLinks = document.querySelectorAll(".nav-link");
 
-/**
- * Toggle le menu mobile quand on clique sur le hamburger
- * Ajoute/retire la classe 'active' pour afficher/cacher le menu
- */
-hamburger.addEventListener('click', () => {
-    // Bascule la classe 'active' sur le menu et le hamburger
-    navMenu.classList.toggle('active');
-    hamburger.classList.toggle('active');
+hamburger.addEventListener("click", () => {
+  const open = navMenu.classList.toggle("active");
+  hamburger.classList.toggle("active", open);
+  hamburger.setAttribute("aria-expanded", String(open));
 });
 
-/**
- * Ferme le menu mobile quand on clique sur un lien
- * Améliore l'expérience utilisateur sur mobile
- */
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
+navLinks.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    navMenu.classList.remove("active");
+    hamburger.classList.remove("active");
+    hamburger.setAttribute("aria-expanded", "false");
+
+    const target = document.querySelector(link.getAttribute("href"));
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight + 2;
+      window.scrollTo({ top, behavior: prefersReducedMotion ? "auto" : "smooth" });
+    }
+  });
+});
+
+/* ombre de nav + lien actif + back-to-top, sur un seul listener scroll */
+const sections = document.querySelectorAll("section[id], header[id]");
+const backToTop = document.createElement("button");
+backToTop.className = "back-to-top";
+backToTop.innerHTML = "↑";
+backToTop.setAttribute("aria-label", "Retour en haut de page");
+document.body.appendChild(backToTop);
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+});
+
+let scrollTick = false;
+window.addEventListener("scroll", () => {
+  if (scrollTick) return;
+  scrollTick = true;
+  requestAnimationFrame(() => {
+    const y = window.scrollY;
+    navbar.classList.toggle("scrolled", y > 10);
+    backToTop.classList.toggle("visible", y > 500);
+
+    const pos = y + navbar.offsetHeight + 90;
+    let currentId = null;
+    sections.forEach((s) => {
+      if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) currentId = s.id;
     });
-});
+    navLinks.forEach((l) => {
+      l.classList.toggle("active-link", l.getAttribute("href") === `#${currentId}`);
+    });
+    scrollTick = false;
+  });
+}, { passive: true });
 
-// ==========================================
-// NAVIGATION FLUIDE (Smooth scroll)
-// Améliore le défilement vers les sections
-// ==========================================
+/* ── Reveals au scroll ────────────────────────────── */
+(function initReveals() {
+  const targets = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window) || prefersReducedMotion) {
+    targets.forEach((el) => el.classList.add("in-view"));
+    return;
+  }
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in-view");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+  targets.forEach((el) => observer.observe(el));
+})();
 
-/**
- * Ajoute un comportement de scroll fluide personnalisé
- * Alternative au CSS scroll-behavior pour plus de contrôle
- */
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault(); // Empêche le comportement par défaut
+/* ── Compteurs de la section À propos ─────────────── */
+(function initCounters() {
+  const nums = document.querySelectorAll("[data-count]");
+  if (!nums.length) return;
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) return; // valeurs déjà écrites en dur
 
-        // Récupère l'ID de la section cible (ex: "#accueil")
-        const targetId = link.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
+  const animate = (el) => {
+    const target = parseInt(el.getAttribute("data-count"), 10);
+    const start = target > 100 ? target - 60 : 0; // les années démarrent proche, les petits nombres de zéro
+    const duration = 1100;
+    const t0 = performance.now();
+    const step = (t) => {
+      const p = Math.min((t - t0) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = String(Math.round(start + (target - start) * eased));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
 
-        if (targetSection) {
-            // Calcule la position en tenant compte de la navbar fixe
-            const navHeight = document.querySelector('.navbar').offsetHeight;
-            const targetPosition = targetSection.offsetTop - navHeight;
+  const obs = new IntersectionObserver((entries, o) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { animate(e.target); o.unobserve(e.target); }
+    });
+  }, { threshold: 0.6 });
+  nums.forEach((el) => obs.observe(el));
+})();
 
-            // Défilement fluide vers la position calculée
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+/* ── Canvas : champ de points de données (hero) ───── */
+(function initDataField() {
+  const canvas = document.getElementById("dataField");
+  if (!canvas || prefersReducedMotion) return;
+  const ctx = canvas.getContext("2d");
+
+  let w, h, points = [], raf;
+  const DENSITY = 1 / 16000; // points par pixel²
+  const LINK_DIST = 130;
+
+  const colors = () => {
+    const dark = document.documentElement.getAttribute("data-theme") === "dark";
+    return {
+      dot: dark ? "rgba(147,164,216,0.55)" : "rgba(43,58,103,0.4)",
+      link: dark ? "rgba(147,164,216," : "rgba(43,58,103,",
+      coral: dark ? "rgba(239,138,113,0.8)" : "rgba(226,114,91,0.7)",
+    };
+  };
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = canvas.offsetWidth;
+    h = canvas.offsetHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = Math.min(Math.round(w * h * DENSITY), 90);
+    points = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: Math.random() * 1.8 + 0.8,
+      coral: Math.random() < 0.12,
+    }));
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, w, h);
+    const c = colors();
+
+    for (const p of points) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+    }
+
+    for (let i = 0; i < points.length; i++) {
+      for (let j = i + 1; j < points.length; j++) {
+        const a = points[i], b = points[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d = Math.hypot(dx, dy);
+        if (d < LINK_DIST) {
+          ctx.strokeStyle = c.link + (0.14 * (1 - d / LINK_DIST)).toFixed(3) + ")";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
         }
+      }
+    }
+
+    for (const p of points) {
+      ctx.fillStyle = p.coral ? c.coral : c.dot;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    raf = requestAnimationFrame(frame);
+  }
+
+  // pause quand le hero sort de l'écran (économie batterie)
+  const hero = document.querySelector(".hero");
+  const visObs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { if (!raf) raf = requestAnimationFrame(frame); }
+      else { cancelAnimationFrame(raf); raf = null; }
     });
+  }, { threshold: 0.05 });
+  visObs.observe(hero);
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 200);
+  });
+
+  resize();
+})();
+
+/* ── Formulaire de contact (EmailJS) ──────────────── */
+const contactForm = document.getElementById("contactForm");
+const formInputs = contactForm.querySelectorAll("input:not(.hp-field), textarea");
+const submitBtn = document.getElementById("submitBtn");
+
+formInputs.forEach((input) => {
+  input.addEventListener("blur", () => validateField(input));
+  input.addEventListener("input", () => {
+    input.closest(".form-group").classList.remove("error");
+  });
 });
 
-// ==========================================
-// ANIMATION DES BARRES DE COMPÉTENCES
-// Les barres se remplissent quand elles deviennent visibles
-// ==========================================
-
-/**
- * Observer pour détecter quand les barres entrent dans le viewport
- * Utilise l'API Intersection Observer (moderne et performant)
- */
-const observerOptions = {
-    threshold: 0.5, // 50% de l'élément doit être visible
-    rootMargin: '0px'
-};
-
-/**
- * Callback appelé quand un élément devient visible
- * @param {Array} entries - Liste des éléments observés
- */
-const animateSkills = (entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            // L'élément est visible, on anime la barre
-            const progressBar = entry.target;
-            const targetWidth = progressBar.getAttribute('data-progress');
-
-            // Animation progressive de 0 à la valeur cible
-            progressBar.style.width = targetWidth + '%';
-        }
-    });
-};
-
-// Créer l'observer avec les options et le callback
-const skillObserver = new IntersectionObserver(animateSkills, observerOptions);
-
-// Observer toutes les barres de compétences
-skillBars.forEach(bar => {
-    skillObserver.observe(bar);
-});
-
-// ==========================================
-// VALIDATION DU FORMULAIRE DE CONTACT
-// Vérifie les champs avant envoi
-// ==========================================
-
-/**
- * Validation en temps réel des champs du formulaire
- * Affiche les erreurs immédiatement
- */
-formInputs.forEach(input => {
-    // Validation à la perte du focus (quand l'utilisateur quitte le champ)
-    input.addEventListener('blur', () => {
-        validateField(input);
-    });
-
-    // Retire l'erreur quand l'utilisateur commence à taper
-    input.addEventListener('input', () => {
-        if (input.parentElement.classList.contains('error')) {
-            input.parentElement.classList.remove('error');
-        }
-    });
-});
-
-/**
- * Valide un champ individuel
- * @param {HTMLElement} field - Le champ à valider
- * @returns {boolean} - true si valide, false sinon
- */
 function validateField(field) {
-    const fieldName = field.name;
-    const fieldValue = field.value.trim();
-    const formGroup = field.parentElement;
-    const errorMessage = formGroup.querySelector('.error-message');
+  const group = field.closest(".form-group");
+  const errorEl = group.querySelector(".error-message");
+  const value = field.value.trim();
+  group.classList.remove("error");
+  errorEl.textContent = "";
 
-    // Réinitialise l'état d'erreur
-    formGroup.classList.remove('error');
-    errorMessage.textContent = '';
+  let message = "";
+  switch (field.name) {
+    case "nom":
+      if (value.length < 2) message = "Le nom doit contenir au moins 2 caractères.";
+      break;
+    case "email":
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) message = "Veuillez entrer un email valide.";
+      break;
+    case "sujet":
+      if (value.length < 3) message = "Le sujet doit contenir au moins 3 caractères.";
+      break;
+    case "message":
+      if (value.length < 10) message = "Le message doit contenir au moins 10 caractères.";
+      break;
+  }
 
-    // Validation selon le type de champ
-    switch (fieldName) {
-        case 'nom':
-            // Le nom doit contenir au moins 2 caractères
-            if (fieldValue.length < 2) {
-                showError(formGroup, errorMessage, 'Le nom doit contenir au moins 2 caractères');
-                return false;
-            }
-            break;
-
-        case 'email':
-            // Validation email avec regex
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(fieldValue)) {
-                showError(formGroup, errorMessage, 'Veuillez entrer un email valide');
-                return false;
-            }
-            break;
-
-        case 'sujet':
-            // Le sujet ne doit pas être vide
-            if (fieldValue.length < 3) {
-                showError(formGroup, errorMessage, 'Le sujet doit contenir au moins 3 caractères');
-                return false;
-            }
-            break;
-
-        case 'message':
-            // Le message doit contenir au moins 10 caractères
-            if (fieldValue.length < 10) {
-                showError(formGroup, errorMessage, 'Le message doit contenir au moins 10 caractères');
-                return false;
-            }
-            break;
-    }
-
-    return true;
+  if (message) {
+    group.classList.add("error");
+    errorEl.textContent = message;
+    return false;
+  }
+  return true;
 }
 
-/**
- * Affiche un message d'erreur pour un champ
- * @param {HTMLElement} formGroup - Le conteneur du champ
- * @param {HTMLElement} errorElement - L'élément pour le message d'erreur
- * @param {string} message - Le message d'erreur à afficher
- */
-function showError(formGroup, errorElement, message) {
-    formGroup.classList.add('error');
-    errorElement.textContent = message;
-}
+contactForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-/**
- * Gestion de la soumission du formulaire
- * Valide tous les champs et envoie si tout est OK
- */
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault(); // Empêche l'envoi par défaut du formulaire
+  // honeypot rempli = robot → on ignore silencieusement
+  const hp = document.getElementById("website");
+  if (hp && hp.value.trim() !== "") return;
 
-    // Valide tous les champs
-    let isFormValid = true;
-    formInputs.forEach(input => {
-        if (!validateField(input)) {
-            isFormValid = false;
-        }
-    });
+  let valid = true;
+  formInputs.forEach((input) => { if (!validateField(input)) valid = false; });
 
-    // Si tous les champs sont valides
-    if (isFormValid) {
-        // Récupération des données du formulaire
-        const formData = {
-            nom: document.getElementById('nom').value,
-            email: document.getElementById('email').value,
-            sujet: document.getElementById('sujet').value,
-            message: document.getElementById('message').value
-        };
+  if (!valid) {
+    const firstError = contactForm.querySelector(".form-group.error");
+    if (firstError) firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
 
-        // Affichage dans la console (pour debug)
-        console.log('Formulaire soumis avec succès :', formData);
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Envoi en cours…";
 
-        // Simulation d'envoi réussi
-        //showSuccessMessage();
-        emailjs.send(
-            "service_cmts3fi",
-            "template_3y2rf78",
-            {
-                from_name: formData.nom,
-                from_email: formData.email,
-                subject: formData.sujet,
-                message: formData.message
-            }
-        )
-            .then(() => {
-                showSuccessMessage();
-                contactForm.reset();
-            })
-            .catch((error) => {
-                console.error("Erreur EmailJS :", error);
-                alert("Erreur lors de l'envoi du message. Veuillez réessayer.");
-            });
-
-
-        // Réinitialise le formulaire
-        // contactForm.reset();
-
-        // ICI, vous pouvez ajouter le code pour envoyer vraiment le formulaire
-        // Par exemple avec fetch() vers un backend ou un service email
-        /*
-        fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            showSuccessMessage();
-            contactForm.reset();
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            alert('Une erreur est survenue. Veuillez réessayer.');
-        });
-        */
-    } else {
-        // Si le formulaire n'est pas valide, scroll vers la première erreur
-        const firstError = document.querySelector('.form-group.error');
-        if (firstError) {
-            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    }
-});
-
-/**
- * Affiche un message de succès après envoi du formulaire
- * Peut être personnalisé selon vos besoins
- */
-function showSuccessMessage() {
-    // Création d'une notification de succès
-    const successDiv = document.createElement('div');
-    successDiv.className = 'success-notification';
-    successDiv.innerHTML = `
-        <p>✓ Message envoyé avec succès ! Je vous répondrai bientôt.</p>
-    `;
-    successDiv.style.cssText = `
-        position: fixed;
-        top: 5rem;
-        right: 2rem;
-        background-color: var(--primary-color);
-        color: white;
-        padding: 1rem 2rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        z-index: 9999;
-        animation: slideInRight 0.3s ease-out;
-    `;
-
-    document.body.appendChild(successDiv);
-
-    // Supprime la notification après 4 secondes
-    setTimeout(() => {
-        successDiv.style.animation = 'slideOutRight 0.3s ease-out';
-        setTimeout(() => {
-            document.body.removeChild(successDiv);
-        }, 300);
-    }, 4000);
-}
-
-// Ajoute les animations CSS pour la notification
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInRight {
-        from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideOutRight {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// ==========================================
-// MISE EN SURBRILLANCE DU LIEN ACTIF
-// Change la couleur du lien de navigation selon la section visible
-// ==========================================
-
-/**
- * Détecte quelle section est visible et met en surbrillance le lien correspondant
- */
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section[id]');
-    const scrollPosition = window.scrollY + 100; // Offset pour la navbar
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-
-        // Vérifie si on est dans cette section
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            // Retire la classe active de tous les liens
-            navLinks.forEach(link => {
-                link.classList.remove('active-link');
-            });
-
-            // Ajoute la classe active au lien correspondant
-            const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-            if (activeLink) {
-                activeLink.classList.add('active-link');
-            }
-        }
+  emailjs.send("service_cmts3fi", "template_3y2rf78", {
+    from_name: document.getElementById("nom").value,
+    from_email: document.getElementById("email").value,
+    subject: document.getElementById("sujet").value,
+    message: document.getElementById("message").value,
+  })
+    .then(() => {
+      notify("✓ Message envoyé ! Je vous réponds très vite.");
+      contactForm.reset();
+    })
+    .catch((error) => {
+      console.error("Erreur EmailJS :", error);
+      notify("✕ L'envoi a échoué. Réessayez, ou écrivez-moi sur WhatsApp.");
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Envoyer le message";
     });
 });
 
-// Ajoute le style pour le lien actif
-const activeLinkStyle = document.createElement('style');
-activeLinkStyle.textContent = `
-    .nav-link.active-link {
-        color: var(--primary-color);
-        position: relative;
-    }
-    
-    .nav-link.active-link::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: var(--primary-color);
-    }
-`;
-document.head.appendChild(activeLinkStyle);
+/* ── Portrait : rotation automatique du stack ─────── */
+(function initPortraitStack() {
+  const frames = Array.from(document.querySelectorAll(".portrait-frame[data-pos]"));
+  if (frames.length < 2 || prefersReducedMotion) return;
 
-// ==========================================
-// ANIMATIONS AU SCROLL (Fade-in)
-// Les éléments apparaissent progressivement quand on scrolle
-// ==========================================
-
-/**
- * Ajoute l'animation fade-in aux éléments quand ils deviennent visibles
- */
-const observeElements = document.querySelectorAll('.project-card, .hobby-card, .timeline-item');
-
-const fadeInOptions = {
-    threshold: 0.2, // 20% de l'élément visible
-    rootMargin: '0px'
-};
-
-/**
- * Callback pour l'animation fade-in
- */
-const fadeInOnScroll = (entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-            // Une fois animé, on arrête d'observer (optimisation)
-            fadeInObserver.unobserve(entry.target);
-        }
+  setInterval(() => {
+    frames.forEach((frame) => {
+      const pos = parseInt(frame.getAttribute("data-pos"), 10);
+      frame.setAttribute("data-pos", String((pos + 2) % 3));
     });
-};
+  }, 4000);
+})();
 
-const fadeInObserver = new IntersectionObserver(fadeInOnScroll, fadeInOptions);
-
-// Observer tous les éléments sélectionnés
-//observeElements.forEach(element => {
-// element.style.opacity = '0'; // Cache initialement
-// fadeInObserver.observe(element);
-//});
-
-// ==========================================
-// BOUTON RETOUR EN HAUT (optionnel)
-// Affiche un bouton pour remonter en haut de la page
-// ==========================================
-
-/**
- * Crée et gère un bouton "retour en haut"
- * Visible uniquement après avoir scrollé
- */
-function createBackToTopButton() {
-    const button = document.createElement('button');
-    button.innerHTML = '↑';
-    button.className = 'back-to-top';
-    button.style.cssText = `
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
-        background-color: var(--primary-color);
-        color: white;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 999;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    `;
-
-    document.body.appendChild(button);
-
-    // Affiche le bouton après 300px de scroll
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            button.style.opacity = '1';
-            button.style.visibility = 'visible';
-        } else {
-            button.style.opacity = '0';
-            button.style.visibility = 'hidden';
-        }
-    });
-
-    // Retour en haut au clic
-    button.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // Effet hover
-    button.addEventListener('mouseenter', () => {
-        button.style.transform = 'translateY(-5px)';
-    });
-
-    button.addEventListener('mouseleave', () => {
-        button.style.transform = 'translateY(0)';
-    });
+function notify(text) {
+  const el = document.createElement("div");
+  el.className = "success-notification";
+  el.textContent = text;
+  document.body.appendChild(el);
+  setTimeout(() => {
+    el.classList.add("leaving");
+    setTimeout(() => el.remove(), 400);
+  }, 4200);
 }
-
-// Initialise le bouton retour en haut
-createBackToTopButton();
-
-// ==========================================
-// CHARGEMENT INITIAL
-// Code exécuté quand la page est complètement chargée
-// ==========================================
-
-/**
- * Événement DOMContentLoaded : la page est prête
- * Bon moment pour initialiser des fonctionnalités
- */
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Portfolio chargé avec succès ! 🚀');
-
-    // Animations légères au scroll (sans casser le rendu si JS échoue)
-    const targets = document.querySelectorAll(
-        '.section-title, .project-category, .project-card, .service-card, .skill-item, .timeline-item, .hobby-card, .tool-badge, .contact-form, .contact-info, .hero-text, .hero-image'
-    );
-
-    const getAnimClass = (el) => {
-        if (el.classList.contains('hero-text')) return 'anim-rise';
-        if (el.classList.contains('hero-image')) return 'anim-right';
-        if (el.classList.contains('section-title')) return 'anim-title';
-        if (el.classList.contains('project-category')) return 'anim-category';
-        if (el.classList.contains('project-card')) return 'anim-pop';
-        if (el.classList.contains('service-card')) return 'anim-rise';
-        if (el.classList.contains('skill-item')) return 'anim-left';
-        if (el.classList.contains('timeline-item')) return 'anim-line';
-        if (el.classList.contains('hobby-card')) return 'anim-tilt';
-        if (el.classList.contains('tool-badge')) return 'anim-chip';
-        if (el.classList.contains('contact-form')) return 'anim-left';
-        if (el.classList.contains('contact-info')) return 'anim-right';
-        return 'anim-rise';
-    };
-
-    targets.forEach((el, index) => {
-        el.classList.add('anim', getAnimClass(el));
-        el.style.transitionDelay = `${(index % 6) * 60}ms`;
-    });
-
-    if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(
-            (entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('in-view');
-                        obs.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.12, rootMargin: '0px 0px -10% 0px' }
-        );
-
-        targets.forEach(el => observer.observe(el));
-    } else {
-        targets.forEach(el => el.classList.add('in-view'));
-    }
-});
-
-/**
- * Événement load : tous les assets (images, etc.) sont chargés
- */
-window.addEventListener('load', () => {
-    console.log('Toutes les ressources sont chargées ! ✓');
-
-    // Masque un éventuel loader si vous en avez un
-    // const loader = document.querySelector('.loader');
-    // if (loader) loader.style.display = 'none';
-});
-
-// ==========================================
-// FONCTIONS UTILITAIRES
-// Fonctions réutilisables dans le code
-// ==========================================
-
-/**
- * Fonction de throttle pour optimiser les événements de scroll
- * Limite le nombre d'appels d'une fonction
- * @param {Function} func - La fonction à throttler
- * @param {number} delay - Délai minimum entre les appels (ms)
- */
-function throttle(func, delay) {
-    let lastCall = 0;
-    return function (...args) {
-        const now = new Date().getTime();
-        if (now - lastCall < delay) {
-            return;
-        }
-        lastCall = now;
-        return func(...args);
-    };
-}
-
-/**
- * Fonction de debounce pour optimiser les événements de resize
- * Attend que l'événement soit terminé avant d'exécuter
- * @param {Function} func - La fonction à debouncer
- * @param {number} delay - Délai d'attente (ms)
- */
-function debounce(func, delay) {
-    let timeoutId;
-    return function (...args) {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => func(...args), delay);
-    };
-}
-
-// Exemple d'utilisation du debounce pour le resize
-window.addEventListener('resize', debounce(() => {
-    console.log('Fenêtre redimensionnée');
-    // Ajoutez ici du code à exécuter au redimensionnement
-}, 250));
-
-// ==========================================
-// EASTER EGG (optionnel, pour le fun !)
-// Un petit secret pour les curieux
-// ==========================================
-
-/**
- * Konami Code Easter Egg
- * Tapez : ↑ ↑ ↓ ↓ ← → ← → B A
- */
-let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-let konamiIndex = 0;
-
-document.addEventListener('keydown', (e) => {
-    if (e.key.toLowerCase() === konamiCode[konamiIndex].toLowerCase()) {
-        konamiIndex++;
-        if (konamiIndex === konamiCode.length) {
-            activateEasterEgg();
-            konamiIndex = 0;
-        }
-    } else {
-        konamiIndex = 0;
-    }
-});
-
-function activateEasterEgg() {
-    alert('🎉 Bravo ! Vous avez trouvé l\'Easter Egg ! 🎮\nVous êtes curieux, c\'est une qualité en data science ! 📊');
-    // Ajoutez un effet visuel fun si vous voulez
-    document.body.style.animation = 'rainbow 2s linear infinite';
-}
-
-// Animation rainbow pour l'easter egg
-const rainbowStyle = document.createElement('style');
-rainbowStyle.textContent = `
-    @keyframes rainbow {
-        0% { filter: hue-rotate(0deg); }
-        100% { filter: hue-rotate(360deg); }
-    }
-`;
-document.head.appendChild(rainbowStyle);
-
-// ==========================================
-// FIN DU SCRIPT
-// Tout le code JavaScript est maintenant chargé et actif
-// ==========================================
-
-console.log('Script.js entièrement chargé ! ✓');
