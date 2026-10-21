@@ -8,18 +8,12 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ── Thème clair / sombre ─────────────────────────── */
-(function initTheme() {
-  const stored = localStorage.getItem("theme");
-  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = stored || (systemDark ? "dark" : "light");
-  document.documentElement.setAttribute("data-theme", theme);
-
-  document.getElementById("themeToggle").addEventListener("click", () => {
-    const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("theme", next);
-  });
-})();
+// le thème initial est posé par le script en tête de index.html (pas de flash)
+document.getElementById("themeToggle").addEventListener("click", () => {
+  const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("theme", next); } catch (e) { /* navigation privée */ }
+});
 
 /* ── Navigation ───────────────────────────────────── */
 const navbar = document.getElementById("navbar");
@@ -52,7 +46,7 @@ navLinks.forEach((link) => {
 const sections = document.querySelectorAll("section[id], header[id]");
 const backToTop = document.createElement("button");
 backToTop.className = "back-to-top";
-backToTop.innerHTML = "↑";
+backToTop.innerHTML = '<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 13.5V3M3.5 7.5 8 3l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 backToTop.setAttribute("aria-label", "Retour en haut de page");
 document.body.appendChild(backToTop);
 backToTop.addEventListener("click", () => {
@@ -82,7 +76,7 @@ window.addEventListener("scroll", () => {
 
 /* ── Reveals au scroll ────────────────────────────── */
 (function initReveals() {
-  const targets = document.querySelectorAll(".reveal");
+  const targets = document.querySelectorAll(".reveal, .trajectory, .skill-index");
   if (!("IntersectionObserver" in window) || prefersReducedMotion) {
     targets.forEach((el) => el.classList.add("in-view"));
     return;
@@ -96,34 +90,6 @@ window.addEventListener("scroll", () => {
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
   targets.forEach((el) => observer.observe(el));
-})();
-
-/* ── Compteurs de la section À propos ─────────────── */
-(function initCounters() {
-  const nums = document.querySelectorAll("[data-count]");
-  if (!nums.length) return;
-  if (prefersReducedMotion || !("IntersectionObserver" in window)) return; // valeurs déjà écrites en dur
-
-  const animate = (el) => {
-    const target = parseInt(el.getAttribute("data-count"), 10);
-    const start = target > 100 ? target - 60 : 0; // les années démarrent proche, les petits nombres de zéro
-    const duration = 1100;
-    const t0 = performance.now();
-    const step = (t) => {
-      const p = Math.min((t - t0) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = String(Math.round(start + (target - start) * eased));
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
-
-  const obs = new IntersectionObserver((entries, o) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) { animate(e.target); o.unobserve(e.target); }
-    });
-  }, { threshold: 0.6 });
-  nums.forEach((el) => obs.observe(el));
 })();
 
 /* ── Planche du hero : brut → structuré → décidé ───── */
@@ -181,7 +147,11 @@ window.addEventListener("scroll", () => {
     dots.forEach((d, i) => d.classList.toggle("is-hot", step === 2 && hotAt[i]));
   }
 
-  if (prefersReducedMotion) { place(); show(2); return; }
+  if (prefersReducedMotion) {
+    place(); show(2);
+    document.getElementById("plateToggle").hidden = true;
+    return;
+  }
 
   const easeOutExpo = (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
   const DURATION = 1300, STAGGER = 14, HOLD = 2600;
@@ -212,19 +182,138 @@ window.addEventListener("scroll", () => {
     raf = requestAnimationFrame(animate);
   }
 
-  function play() { if (!running) { running = true; timer = setTimeout(next, 900); } }
+  let paused = false, started = false;
+  function play() {
+    if (running || paused) return;
+    running = true;
+    timer = setTimeout(next, started ? 600 : 2200); // laisse le temps de lire « Brut » au premier passage
+    started = true;
+  }
   function pause() {
     running = false;
     clearTimeout(timer); cancelAnimationFrame(raf); raf = null;
   }
 
   // pause quand la planche sort de l'écran ou que l'onglet est caché
+  const toggle = document.getElementById("plateToggle");
+  toggle.addEventListener("click", () => {
+    paused = !paused;
+    toggle.setAttribute("aria-pressed", String(paused));
+    toggle.setAttribute("aria-label", paused ? "Relancer l'animation" : "Mettre l'animation en pause");
+    paused ? pause() : inView && play();
+  });
+
   let inView = false;
   new IntersectionObserver(([e]) => {
     inView = e.isIntersecting;
     inView ? play() : pause();
   }, { threshold: 0.2 }).observe(svg);
   document.addEventListener("visibilitychange", () => (document.hidden ? pause() : inView && play()));
+})();
+
+/* ── Figures dessinées : les traits se tracent, les points apparaissent ── */
+function prepFigure(svg) {
+  svg.classList.add("fig-draw");
+  svg.querySelectorAll("line, path, rect, polyline, polygon, circle, ellipse, text").forEach((el, i) => {
+    if (el.closest("defs")) return;
+    const stroked = el.closest("[stroke]");
+    const stroke = stroked && stroked.getAttribute("stroke");
+    const dashed = el.closest("[stroke-dasharray]");
+    if (el.tagName !== "text" && stroke && stroke !== "none" && !dashed) {
+      el.setAttribute("pathLength", "1");
+      el.setAttribute("data-draw", "");
+    } else {
+      el.setAttribute("data-pop", "");
+    }
+    el.style.setProperty("--o", Math.min(i, 18)); // au-delà, tout finit ensemble
+  });
+}
+function redraw(svg) {
+  svg.classList.remove("is-drawn");
+  requestAnimationFrame(() => requestAnimationFrame(() => svg.classList.add("is-drawn")));
+}
+
+/* ── Sommaire : Fig. 3 suit l'entrée lue (bureau), figures en ligne (mobile) ── */
+(function initSommaire() {
+  const entries = Array.from(document.querySelectorAll(".entry"));
+  const stage = document.querySelector(".sf-stage");
+  if (!entries.length || !stage) return;
+  const label = document.querySelector(".sf-label");
+  const caption = document.querySelector(".sf-caption");
+  const desktop = window.matchMedia("(min-width: 1021px)");
+
+  const figs = entries.map((entry) => {
+    const clone = entry.querySelector(".entry-svg").cloneNode(true);
+    stage.appendChild(clone);
+    if (!prefersReducedMotion) {
+      prepFigure(clone);
+      prepFigure(entry.querySelector(".entry-svg"));
+    }
+    return clone;
+  });
+
+  let current = -1;
+  function activate(i) {
+    if (i === current) return;
+    entries.forEach((e, k) => e.classList.toggle("is-active", k === i));
+    figs.forEach((f, k) => f.classList.toggle("is-active", k === i));
+    label.textContent = entries[i].dataset.label;
+    caption.textContent = entries[i].dataset.caption;
+    if (!prefersReducedMotion) redraw(figs[i]);
+    current = i;
+  }
+  activate(0);
+
+  if (!("IntersectionObserver" in window)) return;
+  // l'entrée qui traverse le milieu de l'écran devient active
+  const mid = new IntersectionObserver((list) => {
+    list.forEach((e) => { if (e.isIntersecting && desktop.matches) activate(entries.indexOf(e.target)); });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  entries.forEach((e) => mid.observe(e));
+
+  // mobile : chaque figure se dessine en entrant à l'écran
+  if (prefersReducedMotion) return;
+  const inline = new IntersectionObserver((list, o) => {
+    list.forEach((e) => {
+      if (e.isIntersecting && !desktop.matches) { e.target.classList.add("is-drawn"); o.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  entries.forEach((e) => inline.observe(e.querySelector(".entry-svg")));
+})();
+
+/* ── Index des compétences : une référence allume ce qu'elle a mobilisé ── */
+(function initSkillIndex() {
+  const index = document.getElementById("skillIndex");
+  if (!index) return;
+  const items = Array.from(index.querySelectorAll(".ix-entry"));
+  const refs = index.querySelectorAll(".ix-refs a");
+  items.forEach((el, i) => el.style.setProperty("--i", i));
+
+  const light = (src) => {
+    index.dataset.hl = src;
+    items.forEach((el) => el.classList.toggle("is-lit", el.dataset.src.split(" ").includes(src)));
+    refs.forEach((a) => a.classList.toggle("is-match", a.dataset.src === src));
+  };
+  const clear = () => {
+    delete index.dataset.hl;
+    items.forEach((el) => el.classList.remove("is-lit"));
+    refs.forEach((a) => a.classList.remove("is-match"));
+  };
+  refs.forEach((a) => {
+    a.addEventListener("mouseenter", () => light(a.dataset.src));
+    a.addEventListener("focus", () => light(a.dataset.src));
+    a.addEventListener("mouseleave", clear);
+    a.addEventListener("blur", clear);
+  });
+
+  // une fois l'apparition finie, on retire les délais pour que le survol réagisse tout de suite
+  const settle = new MutationObserver(() => {
+    if (index.classList.contains("in-view")) {
+      setTimeout(() => index.classList.add("is-settled"), 1900);
+      settle.disconnect();
+    }
+  });
+  settle.observe(index, { attributes: true, attributeFilter: ["class"] });
 })();
 
 /* ── Formulaire de contact (EmailJS) ──────────────── */
@@ -236,6 +325,7 @@ formInputs.forEach((input) => {
   input.addEventListener("blur", () => validateField(input));
   input.addEventListener("input", () => {
     input.closest(".form-group").classList.remove("error");
+    input.removeAttribute("aria-invalid");
   });
 });
 
@@ -244,6 +334,7 @@ function validateField(field) {
   const errorEl = group.querySelector(".error-message");
   const value = field.value.trim();
   group.classList.remove("error");
+  field.removeAttribute("aria-invalid");
   errorEl.textContent = "";
 
   let message = "";
@@ -264,6 +355,7 @@ function validateField(field) {
 
   if (message) {
     group.classList.add("error");
+    field.setAttribute("aria-invalid", "true");
     errorEl.textContent = message;
     return false;
   }
@@ -281,41 +373,63 @@ contactForm.addEventListener("submit", (e) => {
   formInputs.forEach((input) => { if (!validateField(input)) valid = false; });
 
   if (!valid) {
-    const firstError = contactForm.querySelector(".form-group.error");
-    if (firstError) firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+    const firstError = contactForm.querySelector("[aria-invalid='true']");
+    if (firstError) firstError.focus();
     return;
   }
 
   submitBtn.disabled = true;
   submitBtn.textContent = "Envoi en cours…";
 
-  emailjs.send("service_cmts3fi", "template_3y2rf78", {
-    from_name: document.getElementById("nom").value,
-    from_email: document.getElementById("email").value,
-    subject: document.getElementById("sujet").value,
-    message: document.getElementById("message").value,
-  })
+  const reset = () => {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Envoyer le message";
+  };
+
+  // Promise.resolve().then : une erreur synchrone (EmailJS non chargé) arrive aussi dans le catch
+  Promise.resolve()
     .then(() => {
-      notify("✓ Message envoyé ! Je vous réponds très vite.");
+      if (typeof emailjs === "undefined") throw new Error("EmailJS non chargé");
+      return emailjs.send("service_cmts3fi", "template_3y2rf78", {
+        from_name: document.getElementById("nom").value,
+        from_email: document.getElementById("email").value,
+        subject: document.getElementById("sujet").value,
+        message: document.getElementById("message").value,
+      });
+    })
+    .then(() => {
+      notify("ok", "Message envoyé", "Merci, je vous réponds très vite.");
       contactForm.reset();
     })
     .catch((error) => {
-      console.error("Erreur EmailJS :", error);
-      notify("✕ L'envoi a échoué. Réessayez, ou écrivez-moi sur WhatsApp.");
+      console.error("Erreur d'envoi :", error);
+      notify("error", "L'envoi n'a pas abouti", "Votre message est toujours dans le formulaire. Réessayez, ou écrivez-moi directement :");
     })
-    .finally(() => {
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Envoyer le message";
-    });
+    .finally(reset);
 });
 
-function notify(text) {
+function notify(kind, title, text) {
   const el = document.createElement("div");
-  el.className = "success-notification";
-  el.textContent = text;
+  el.className = `toast toast--${kind}`;
+  el.setAttribute("role", kind === "error" ? "alert" : "status");
+  const t = document.createElement("strong");
+  t.className = "toast-title";
+  t.textContent = title;
+  const p = document.createElement("span");
+  p.textContent = text;
+  el.append(t, p);
+  if (kind === "error") {
+    const a = document.createElement("a");
+    a.href = "https://wa.me/2290147167062";
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.className = "link-sweep";
+    a.textContent = "WhatsApp ou penieltoton51@gmail.com";
+    el.append(a);
+  }
   document.body.appendChild(el);
   setTimeout(() => {
     el.classList.add("leaving");
     setTimeout(() => el.remove(), 400);
-  }, 4200);
+  }, kind === "error" ? 9000 : 4200);
 }

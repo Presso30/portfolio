@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfolio de Péniel-Prestige Toton (Presso) : data science, IA et automatisation, depuis Abomey-Calavi au Bénin.">
   <title>Péniel-Prestige Toton (Presso) | Data &amp; IA</title>
+  <script>
+    // avant le premier affichage : JS présent + thème mémorisé, pour éviter le flash clair en mode sombre
+    (function () {
+      var d = document.documentElement, t = null;
+      d.className = d.className.replace("no-js", "js");
+      try { t = localStorage.getItem("theme"); } catch (e) {}
+      d.setAttribute("data-theme", t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+    })();
+  </script>
   <meta name="theme-color" content="#f7f4ed" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#12172a" media="(prefers-color-scheme: dark)">
 
@@ -51,9 +60,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Hanken+Grotesk:ital,wght@0,300..800;1,300..800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=20261021">
+  <link rel="stylesheet" href="style.css?v=20261022">
 </head>
 <body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
 
   <!-- ══════════ NAVIGATION ══════════ -->
   <nav class="navbar" id="navbar">
@@ -89,11 +99,6 @@
 
     <div class="hero-inner">
       <div class="hero-text">
-        <p class="hero-eyebrow load-reveal" style="--d:0">
-          <span class="eyebrow-dot" aria-hidden="true"></span>
-          Data, IA &amp; automatisation · Abomey-Calavi
-        </p>
-
         <h1 class="hero-title">
           <span class="line load-reveal" style="--d:1">Je transforme des</span>
           <span class="line load-reveal" style="--d:2"><em>données brutes</em> en</span>
@@ -116,7 +121,13 @@
         <div class="plate">
           <div class="plate-head">
             <span>Fig.&nbsp;1</span>
-            <span class="plate-n">n&nbsp;=&nbsp;42</span>
+            <span class="plate-head-right">
+              <span class="plate-n">n&nbsp;=&nbsp;42</span>
+              <button type="button" class="plate-toggle" id="plateToggle" aria-pressed="false" aria-label="Mettre l'animation en pause">
+                <svg class="i-pause" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3v10M11 3v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <svg class="i-play" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3.2v9.6L12.5 8Z" fill="currentColor"/></svg>
+              </button>
+            </span>
           </div>
           <svg class="plate-svg" id="plateSvg" viewBox="0 0 360 290" role="img"
                aria-label="Un nuage de points en désordre s'aligne sur une tendance, puis se range en colonnes dont la plus haute ressort en corail.">
@@ -142,20 +153,14 @@
       </figure>
     </div>
 
-    <a class="hero-scroll load-reveal" style="--d:6" href="#apropos" aria-label="Descendre vers À propos">
-      <span class="scroll-line" aria-hidden="true"></span> défiler
-    </a>
+    <div class="hero-dateline load-reveal" style="--d:6">
+      <span>Octobre 2026 · Abomey-Calavi, Bénin</span>
+      <span class="hero-dateline-mid">Data, IA &amp; automatisation</span>
+      <a href="#apropos" class="hero-dateline-next">Lire la suite<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M8 2v11M3.5 8.5 8 13l4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
   </header>
 
-  <!-- ══════════ MARQUEE ══════════ -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Python</span><i>◆</i><span>Machine Learning</span><i>◆</i><span>NLP&nbsp;/&nbsp;LLM</span><i>◆</i><span>Computer Vision</span><i>◆</i><span>SQL</span><i>◆</i><span>Power BI</span><i>◆</i><span>Automatisation</span><i>◆</i><span>Docker</span><i>◆</i><span>Économétrie</span><i>◆</i>
-      <span>Python</span><i>◆</i><span>Machine Learning</span><i>◆</i><span>NLP&nbsp;/&nbsp;LLM</span><i>◆</i><span>Computer Vision</span><i>◆</i><span>SQL</span><i>◆</i><span>Power BI</span><i>◆</i><span>Automatisation</span><i>◆</i><span>Docker</span><i>◆</i><span>Économétrie</span><i>◆</i>
-    </div>
-  </div>
-
-  <main>
+  <main id="main">
     <!-- ══════════ 01 · À PROPOS ══════════ -->
     <section id="apropos" class="section">
       <div class="section-head reveal">
@@ -165,8 +170,8 @@
 
       <div class="about-grid">
         <div class="about-text reveal">
-          <p class="lede">Je m'appelle <strong>Péniel-Prestige Toton</strong>, data practitioner
-          formé à l'économétrie et tombé amoureux de l'intelligence artificielle.</p>
+          <p class="lede">Je m'appelle <strong>Péniel-Prestige Toton</strong>. Formé à l'économétrie,
+          je suis tombé amoureux de l'intelligence artificielle.</p>
 
           <p>Après une licence en <strong>Économétrie &amp; Statistiques Appliquées</strong> (FASEG/UAC, 2023)
           et un <strong>Master&nbsp;1 IA &amp; Big Data</strong> (2025, mention Bien), je travaille aujourd'hui
@@ -178,30 +183,52 @@
           de deep learning, en passant par des macros VBA qui font gagner des heures.</p>
 
           <div class="about-actions">
-            <a href="CV-Peniel-Toton-2026.pdf" target="_blank" rel="noopener" class="btn btn--indigo">Visualiser mon CV&nbsp;↗</a>
+            <a href="CV-Peniel-Toton-2026.pdf" target="_blank" rel="noopener" class="btn btn--indigo">Mon CV en PDF&nbsp;↗</a>
             <a href="#contact" class="btn btn--ghost">Discutons de votre projet</a>
           </div>
         </div>
-
-        <aside class="about-facts reveal">
-          <div class="fact">
-            <span class="fact-num" data-count="2018">2018</span>
-            <span class="fact-label">premiers projets data en freelance</span>
-          </div>
-          <div class="fact">
-            <span class="fact-num"><span data-count="7">7</span>+</span>
-            <span class="fact-label">projets &amp; compétitions menés</span>
-          </div>
-          <div class="fact">
-            <span class="fact-num" data-count="3">3</span>
-            <span class="fact-label">stages : Trésor, Moov, ANIP</span>
-          </div>
-          <div class="fact">
-            <span class="fact-num" data-count="2">2</span>
-            <span class="fact-label">diplômes obtenus avec mention</span>
-          </div>
-        </aside>
       </div>
+
+      <figure class="trajectory" id="fig2">
+        <div class="plate plate--wide">
+          <div class="plate-head">
+            <span>Fig.&nbsp;2 · Trajectoire</span>
+            <span>2016 – 2026</span>
+          </div>
+          <div class="traj">
+            <div class="traj-lane">
+              <span class="traj-name">Commerce familial</span>
+              <div class="traj-track"><span class="traj-item is-open" style="--s:0;--e:98.2;--k:0"><span class="traj-bar"></span><span class="traj-tag">Gestion des ventes, depuis 2016</span></span></div>
+            </div>
+            <div class="traj-lane">
+              <span class="traj-name">Freelance data</span>
+              <div class="traj-track"><span class="traj-item" style="--s:18.18;--e:90.9;--k:1"><span class="traj-bar"></span><span class="traj-tag">Data analyst &amp; statisticien</span></span></div>
+            </div>
+            <div class="traj-lane">
+              <span class="traj-name">Études</span>
+              <div class="traj-track"><span class="traj-item" style="--s:27.27;--e:68.18;--k:2"><span class="traj-bar"></span><span class="traj-tag">Licence<span class="t-long"> économétrie</span></span></span><span class="traj-item is-end" style="--s:79.5;--e:87.3;--k:3"><span class="traj-bar"></span><span class="traj-tag">Master&nbsp;1 IA</span></span></div>
+            </div>
+            <div class="traj-lane">
+              <span class="traj-name">Stages</span>
+              <div class="traj-track"><span class="traj-item" style="--s:72.73;--e:75.76;--k:4"><span class="traj-bar"></span><span class="traj-tag">Trésor</span></span><span class="traj-item is-open is-now is-end" style="--s:93.18;--e:98.2;--k:5"><span class="traj-bar"></span><span class="traj-tag">ANIP</span></span></div>
+            </div>
+            <div class="traj-lane">
+              <span class="traj-name">Missions</span>
+              <div class="traj-track"><span class="traj-item is-end" style="--s:92.42;--e:92.97;--k:6"><span class="traj-bar"></span><span class="traj-tag">Moov Africa</span></span></div>
+            </div>
+            <div class="traj-lane">
+              <span class="traj-name">PRESSO</span>
+              <div class="traj-track"><span class="traj-item is-open is-end" style="--s:89.39;--e:98.2;--k:7"><span class="traj-bar"></span><span class="traj-tag">Agence web &amp; data</span></span></div>
+            </div>
+            <div class="traj-lane traj-lane--axis" aria-hidden="true">
+              <span class="traj-name"></span>
+              <div class="traj-track traj-ticks"><span style="--x:0.00">2016</span><span style="--x:9.09" class="is-odd">2017</span><span style="--x:18.18">2018</span><span style="--x:27.27" class="is-odd">2019</span><span style="--x:36.36">2020</span><span style="--x:45.45" class="is-odd">2021</span><span style="--x:54.55">2022</span><span style="--x:63.64" class="is-odd">2023</span><span style="--x:72.73">2024</span><span style="--x:81.82" class="is-odd">2025</span><span style="--x:90.91">2026</span></div>
+            </div>
+            <div class="traj-now" aria-hidden="true"><span>oct. 2026</span></div>
+          </div>
+        </div>
+        <figcaption class="plate-caption">Du commerce familial au stage à l'ANIP, la donnée comme fil.</figcaption>
+      </figure>
     </section>
 
     <!-- ══════════ 02 · PROJETS ══════════ -->
@@ -213,7 +240,7 @@
       </div>
 
       <div class="features">
-        <article class="feature reveal">
+        <article class="feature reveal" id="f-brand">
           <div class="feature-visual">
             <svg class="feature-svg" viewBox="0 0 400 240" aria-hidden="true" focusable="false">
               <rect x="30" y="24" width="340" height="192" rx="8" fill="none" stroke="var(--indigo)" stroke-width="1.6"/>
@@ -252,7 +279,7 @@
           </div>
         </article>
 
-        <article class="feature reveal">
+        <article class="feature reveal" id="f-mysanvi">
           <div class="feature-visual">
             <svg class="feature-svg" viewBox="0 0 400 240" aria-hidden="true" focusable="false">
               <rect x="146" y="14" width="108" height="212" rx="16" fill="none" stroke="var(--indigo)" stroke-width="1.6"/>
@@ -289,7 +316,7 @@
           </div>
         </article>
 
-        <article class="feature reveal">
+        <article class="feature reveal" id="f-skilltree">
           <div class="feature-visual">
             <svg class="feature-svg" viewBox="0 0 400 240" aria-hidden="true" focusable="false">
               <text x="34" y="44" font-family="var(--font-mono)" font-size="12" fill="var(--indigo)" opacity="0.8">$ /skilltree</text>
@@ -325,255 +352,251 @@
         </article>
       </div>
 
-      <h3 class="projects-subhead reveal">Compétitions &amp; expérimentations</h3>
+      <h3 class="projects-subhead reveal">Sommaire des expériences</h3>
 
-      <div class="projects-grid">
-        <article class="project-card reveal" style="--i:0">
-          <span class="project-index">№&nbsp;1</span>
-          <div class="project-visual">
-            <svg class="project-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
-              <rect x="14" y="14" width="272" height="92" rx="3" fill="none" stroke="var(--indigo)" stroke-width="1.6" opacity="0.75"/>
-              <rect x="14" y="42" width="46" height="36" fill="none" stroke="var(--indigo)" stroke-width="1.4" opacity="0.55"/>
-              <rect x="14" y="54" width="18" height="12" fill="none" stroke="var(--indigo)" stroke-width="1.4" opacity="0.55"/>
-              <path d="M286 38 A22 22 0 0 1 286 82" fill="none" stroke="var(--indigo)" stroke-width="1.4" opacity="0.55"/>
-              <g fill="var(--indigo)">
-                <circle cx="70" cy="34" r="3"/>
-                <circle cx="90" cy="90" r="3"/>
-                <circle cx="150" cy="50" r="3"/>
-                <circle cx="200" cy="80" r="3"/>
-              </g>
-              <g stroke="var(--coral)" stroke-width="1.6" stroke-linecap="round" fill="none" opacity="0.9">
-                <line x1="70" y1="34" x2="148" y2="49"/>
-                <path d="M148 49 l-7 -3 M148 49 l-3 7"/>
-                <line x1="90" y1="90" x2="148" y2="52"/>
-                <path d="M148 52 l-8 1 M148 52 l-3 -8"/>
-                <line x1="152" y1="50" x2="198" y2="79"/>
-                <path d="M198 79 l-9 -2 M198 79 l-4 -8"/>
-              </g>
+      <div class="sommaire">
+        <ol class="sommaire-list">
+          <li class="entry" id="p-football" data-label="01 · Football" data-caption="Des passes, des patterns.">
+            <span class="entry-num">01</span>
+            <div class="entry-body">
+              <h4 class="entry-title">Analyse de matchs de football</h4>
+              <p class="entry-meta">Sport · statistiques descriptives</p>
+              <p class="entry-desc">Pipeline d'analyse statistique : extraction d'événements, patterns récurrents et signaux fiables à partir de données historiques de matchs.</p>
+              <div class="tags"><span>Python</span><span>Pandas</span><span>Stats</span></div>
+              <a href="https://github.com/Presso30/analyse-matchs-football" target="_blank" rel="noopener" class="entry-link link-sweep">Voir le dépôt sur GitHub&nbsp;↗</a>
+            </div>
+            <figure class="entry-fig" aria-hidden="true">
+            <svg class="entry-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
+            <rect x="14" y="14" width="272" height="92" rx="3" fill="none" stroke="var(--indigo)" stroke-width="1.6" opacity="0.75"/>
+            <rect x="14" y="42" width="46" height="36" fill="none" stroke="var(--indigo)" stroke-width="1.4" opacity="0.55"/>
+            <rect x="14" y="54" width="18" height="12" fill="none" stroke="var(--indigo)" stroke-width="1.4" opacity="0.55"/>
+            <path d="M286 38 A22 22 0 0 1 286 82" fill="none" stroke="var(--indigo)" stroke-width="1.4" opacity="0.55"/>
+            <g fill="var(--indigo)">
+            <circle cx="70" cy="34" r="3"/>
+            <circle cx="90" cy="90" r="3"/>
+            <circle cx="150" cy="50" r="3"/>
+            <circle cx="200" cy="80" r="3"/>
+            </g>
+            <g stroke="var(--coral)" stroke-width="1.6" stroke-linecap="round" fill="none" opacity="0.9">
+            <line x1="70" y1="34" x2="148" y2="49"/>
+            <path d="M148 49 l-7 -3 M148 49 l-3 7"/>
+            <line x1="90" y1="90" x2="148" y2="52"/>
+            <path d="M148 52 l-8 1 M148 52 l-3 -8"/>
+            <line x1="152" y1="50" x2="198" y2="79"/>
+            <path d="M198 79 l-9 -2 M198 79 l-4 -8"/>
+            </g>
             </svg>
-          </div>
-          <h3>Analyse de matchs de football</h3>
-          <p>Pipeline d'analyse statistique : extraction d'événements, patterns récurrents
-          et signaux fiables à partir de données historiques de matchs.</p>
-          <div class="tags"><span>Python</span><span>Pandas</span><span>Stats</span></div>
-        </article>
+            </figure>
+          </li>
+          <li class="entry" id="p-kaggle" data-label="02 · Kaggle" data-caption="Une droite à travers le nuage.">
+            <span class="entry-num">02</span>
+            <div class="entry-body">
+              <h4 class="entry-title">Kaggle&nbsp;: Calories Burned</h4>
+              <p class="entry-meta">Compétition Kaggle · régression</p>
+              <p class="entry-desc">Playground Series : feature engineering avancé et modèles de régression (Ridge, Random Forest, XGBoost) avec optimisation d'hyperparamètres.</p>
+              <div class="tags"><span>Kaggle</span><span>Régression</span><span>ML</span></div>
+            </div>
+            <figure class="entry-fig" aria-hidden="true">
+            <svg class="entry-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
+            <line x1="20" y1="100" x2="280" y2="100" stroke="var(--mist)" stroke-width="1.2" opacity="0.55"/>
+            <line x1="20" y1="14" x2="20" y2="100" stroke="var(--mist)" stroke-width="1.2" opacity="0.55"/>
+            <g fill="var(--indigo)" opacity="0.75">
+            <circle cx="30" cy="88" r="2.4"/><circle cx="45" cy="80" r="2.4"/><circle cx="55" cy="90" r="2.4"/>
+            <circle cx="70" cy="78" r="2.4"/><circle cx="85" cy="70" r="2.4"/><circle cx="100" cy="82" r="2.4"/>
+            <circle cx="115" cy="65" r="2.4"/><circle cx="132" cy="60" r="2.4"/><circle cx="148" cy="68" r="2.4"/>
+            <circle cx="163" cy="50" r="2.4"/><circle cx="180" cy="55" r="2.4"/><circle cx="198" cy="42" r="2.4"/>
+            <circle cx="218" cy="48" r="2.4"/><circle cx="238" cy="30" r="2.4"/>
+            </g>
+            <path d="M24,96 C90,74 180,44 276,20" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+            </svg>
+            </figure>
+          </li>
+          <li class="entry" id="p-zindi" data-label="03 · Zindi" data-caption="Trois points qui ne collent pas.">
+            <span class="entry-num">03</span>
+            <div class="entry-body">
+              <h4 class="entry-title">Zindi&nbsp;: détection de fraude</h4>
+              <p class="entry-meta">Compétition Zindi · classes déséquilibrées</p>
+              <p class="entry-desc">Fraude sur consommation d'électricité &amp; gaz : gestion du déséquilibre de classes (SMOTE), classification et évaluation rigoureuse.</p>
+              <div class="tags"><span>Zindi</span><span>Classification</span><span>SMOTE</span></div>
+            </div>
+            <figure class="entry-fig" aria-hidden="true">
+            <svg class="entry-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
+            <g fill="var(--indigo)" opacity="0.7">
+            <circle cx="120" cy="50" r="2.3"/><circle cx="135" cy="60" r="2.3"/><circle cx="150" cy="45" r="2.3"/>
+            <circle cx="140" cy="70" r="2.3"/><circle cx="160" cy="65" r="2.3"/><circle cx="125" cy="65" r="2.3"/>
+            <circle cx="155" cy="55" r="2.3"/><circle cx="145" cy="40" r="2.3"/><circle cx="170" cy="50" r="2.3"/>
+            <circle cx="130" cy="80" r="2.3"/><circle cx="165" cy="75" r="2.3"/><circle cx="110" cy="60" r="2.3"/>
+            <circle cx="180" cy="60" r="2.3"/><circle cx="148" cy="85" r="2.3"/><circle cx="118" cy="75" r="2.3"/>
+            <circle cx="175" cy="40" r="2.3"/><circle cx="105" cy="45" r="2.3"/><circle cx="190" cy="70" r="2.3"/>
+            </g>
+            <g fill="var(--coral)">
+            <circle cx="40" cy="25" r="2.6"/>
+            <circle cx="255" cy="30" r="2.6"/>
+            <circle cx="240" cy="95" r="2.6"/>
+            </g>
+            <g fill="none" stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="2.5 3" opacity="0.85">
+            <circle cx="40" cy="25" r="10"/>
+            <circle cx="255" cy="30" r="10"/>
+            <circle cx="240" cy="95" r="10"/>
+            </g>
+            </svg>
+            </figure>
+          </li>
+          <li class="entry" id="p-asr" data-label="04 · ASR" data-caption="Du son au texte.">
+            <span class="entry-num">04</span>
+            <div class="entry-body">
+              <h4 class="entry-title">ASR&nbsp;: transcription vocale</h4>
+              <p class="entry-meta">Audio · deep learning</p>
+              <p class="entry-desc">Prétraitement audio, préparation de jeux de données et entraînement de modèles de reconnaissance automatique de la parole.</p>
+              <div class="tags"><span>NLP</span><span>Audio</span><span>Deep Learning</span></div>
+            </div>
+            <figure class="entry-fig" aria-hidden="true">
+            <svg class="entry-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
+            <line x1="18" y1="60" x2="228" y2="60" stroke="var(--mist)" stroke-width="1" opacity="0.4"/>
+            <g stroke="var(--indigo)" stroke-width="3.4" stroke-linecap="round" opacity="0.85">
+            <line x1="20" y1="55" x2="20" y2="65"/>
+            <line x1="32" y1="51" x2="32" y2="69"/>
+            <line x1="44" y1="47" x2="44" y2="73"/>
+            <line x1="56" y1="53" x2="56" y2="67"/>
+            <line x1="68" y1="43" x2="68" y2="77"/>
+            <line x1="80" y1="50" x2="80" y2="70"/>
+            <line x1="104" y1="46" x2="104" y2="74"/>
+            <line x1="116" y1="38" x2="116" y2="82"/>
+            <line x1="140" y1="49" x2="140" y2="71"/>
+            <line x1="152" y1="42" x2="152" y2="78"/>
+            <line x1="164" y1="53" x2="164" y2="67"/>
+            <line x1="176" y1="35" x2="176" y2="85"/>
+            <line x1="200" y1="51" x2="200" y2="69"/>
+            <line x1="212" y1="46" x2="212" y2="74"/>
+            <line x1="224" y1="55" x2="224" y2="65"/>
+            </g>
+            <g stroke="var(--coral)" stroke-width="3.4" stroke-linecap="round">
+            <line x1="92" y1="35" x2="92" y2="85"/>
+            <line x1="128" y1="30" x2="128" y2="90"/>
+            <line x1="188" y1="40" x2="188" y2="80"/>
+            </g>
+            <text x="236" y="65" font-family="var(--font-mono)" font-size="15" fill="var(--indigo)">▸ abc</text>
+            </svg>
+            </figure>
+          </li>
+          <li class="entry" id="p-cnn" data-label="05 · CNN & RNN" data-caption="Trois couches, deux sorties.">
+            <span class="entry-num">05</span>
+            <div class="entry-body">
+              <h4 class="entry-title">Architectures CNN &amp; RNN</h4>
+              <p class="entry-meta">Vision et séquences · deep learning</p>
+              <p class="entry-desc">Expérimentations sur la classification d'images (MNIST) et les séquences : réglages d'hyperparamètres et analyse des performances.</p>
+              <div class="tags"><span>CNN</span><span>RNN</span><span>Vision</span></div>
+            </div>
+            <figure class="entry-fig" aria-hidden="true">
+            <svg class="entry-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
+            <g stroke="var(--indigo)" stroke-width="1.1" opacity="0.35">
+            <line x1="70" y1="30" x2="150" y2="20"/><line x1="70" y1="30" x2="150" y2="47"/><line x1="70" y1="30" x2="150" y2="73"/><line x1="70" y1="30" x2="150" y2="100"/>
+            <line x1="70" y1="60" x2="150" y2="20"/><line x1="70" y1="60" x2="150" y2="47"/><line x1="70" y1="60" x2="150" y2="73"/><line x1="70" y1="60" x2="150" y2="100"/>
+            <line x1="70" y1="90" x2="150" y2="20"/><line x1="70" y1="90" x2="150" y2="47"/><line x1="70" y1="90" x2="150" y2="73"/><line x1="70" y1="90" x2="150" y2="100"/>
+            <line x1="150" y1="20" x2="230" y2="40"/><line x1="150" y1="47" x2="230" y2="40"/><line x1="150" y1="73" x2="230" y2="40"/><line x1="150" y1="100" x2="230" y2="40"/>
+            <line x1="150" y1="20" x2="230" y2="80"/><line x1="150" y1="47" x2="230" y2="80"/><line x1="150" y1="73" x2="230" y2="80"/><line x1="150" y1="100" x2="230" y2="80"/>
+            </g>
+            <g stroke="var(--coral)" stroke-width="1.6" opacity="0.9">
+            <line x1="70" y1="30" x2="150" y2="47"/>
+            <line x1="150" y1="47" x2="230" y2="80"/>
+            </g>
+            <g fill="var(--indigo)">
+            <circle cx="70" cy="30" r="5"/><circle cx="70" cy="60" r="5"/><circle cx="70" cy="90" r="5"/>
+            <circle cx="150" cy="20" r="5"/><circle cx="150" cy="73" r="5"/><circle cx="150" cy="100" r="5"/>
+            <circle cx="230" cy="40" r="5"/>
+            </g>
+            <g fill="var(--coral)">
+            <circle cx="150" cy="47" r="5"/>
+            <circle cx="230" cy="80" r="5"/>
+            </g>
+            </svg>
+            </figure>
+          </li>
+          <li class="entry" id="p-qlearning" data-label="06 · Q-Learning" data-caption="Le plus court chemin, appris.">
+            <span class="entry-num">06</span>
+            <div class="entry-body">
+              <h4 class="entry-title">Q-Learning&nbsp;: renforcement</h4>
+              <p class="entry-meta">Apprentissage par renforcement</p>
+              <p class="entry-desc">Agent d'apprentissage par renforcement sur environnement simple : exploration/exploitation et analyse de convergence.</p>
+              <div class="tags"><span>RL</span><span>Q-Learning</span><span>Python</span></div>
+            </div>
+            <figure class="entry-fig" aria-hidden="true">
+            <svg class="entry-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
+            <g stroke="var(--indigo)" stroke-width="1.2" opacity="0.5">
+            <line x1="25" y1="15" x2="25" y2="105"/><line x1="75" y1="15" x2="75" y2="105"/>
+            <line x1="125" y1="15" x2="125" y2="105"/><line x1="175" y1="15" x2="175" y2="105"/>
+            <line x1="225" y1="15" x2="225" y2="105"/><line x1="275" y1="15" x2="275" y2="105"/>
+            <line x1="25" y1="15" x2="275" y2="15"/><line x1="25" y1="45" x2="275" y2="45"/>
+            <line x1="25" y1="75" x2="275" y2="75"/><line x1="25" y1="105" x2="275" y2="105"/>
+            </g>
+            <circle cx="50" cy="30" r="5" fill="none" stroke="var(--indigo)" stroke-width="1.6"/>
+            <path d="M245 82 l5 8 l5 -8 l-8 3 l6 0 Z" fill="var(--coral)" stroke="var(--coral)" stroke-width="1" stroke-linejoin="round"/>
+            <g stroke="var(--coral)" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.9">
+            <line x1="50" y1="30" x2="95" y2="30"/><path d="M95 30 l-6 -4 M95 30 l-6 4"/>
+            <line x1="100" y1="30" x2="100" y2="60"/><path d="M100 60 l-4 -6 M100 60 l4 -6"/>
+            <line x1="100" y1="60" x2="145" y2="60"/><path d="M145 60 l-6 -4 M145 60 l-6 4"/>
+            <line x1="150" y1="60" x2="150" y2="90"/><path d="M150 90 l-4 -6 M150 90 l4 -6"/>
+            <line x1="150" y1="90" x2="245" y2="90"/><path d="M245 90 l-6 -4 M245 90 l-6 4"/>
+            </g>
+            </svg>
+            </figure>
+          </li>
+          <li class="entry" id="p-hill" data-label="07 · Hill" data-caption="Le message, brouillé.">
+            <span class="entry-num">07</span>
+            <div class="entry-body">
+              <h4 class="entry-title">Chiffrement par matrice de Hill</h4>
+              <p class="entry-meta">Cryptographie · application</p>
+              <p class="entry-desc">Application de chiffrement/déchiffrement : génération de clés, interface mobile-friendly, robustesse en cours d'amélioration.</p>
+              <div class="tags"><span>Crypto</span><span>App</span><span>Sécurité</span></div>
+            </div>
+            <figure class="entry-fig" aria-hidden="true">
+            <svg class="entry-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
+            <g stroke="var(--indigo)" stroke-width="1.3" fill="none" opacity="0.7">
+            <rect x="10" y="20" width="78" height="78"/>
+            <line x1="36" y1="20" x2="36" y2="98"/><line x1="62" y1="20" x2="62" y2="98"/>
+            <line x1="10" y1="46" x2="88" y2="46"/><line x1="10" y1="72" x2="88" y2="72"/>
+            </g>
+            <g font-family="var(--font-mono)" font-size="15" fill="var(--indigo)" text-anchor="middle">
+            <text x="23" y="38">A</text><text x="49" y="38">K</text><text x="75" y="38">X</text>
+            <text x="23" y="64">M</text><text x="49" y="64">R</text><text x="75" y="64">Q</text>
+            <text x="23" y="90">T</text><text x="49" y="90">G</text><text x="75" y="90">Z</text>
+            </g>
+            <g stroke="var(--coral)" stroke-width="1.8" stroke-linecap="round" fill="none">
+            <line x1="102" y1="59" x2="140" y2="59"/><path d="M140 59 l-7 -5 M140 59 l-7 5"/>
+            </g>
+            <g stroke="var(--coral)" stroke-width="1.3" fill="none" opacity="0.8">
+            <rect x="150" y="20" width="78" height="78"/>
+            <line x1="176" y1="20" x2="176" y2="98"/><line x1="202" y1="20" x2="202" y2="98"/>
+            <line x1="150" y1="46" x2="228" y2="46"/><line x1="150" y1="72" x2="228" y2="72"/>
+            </g>
+            <g font-family="var(--font-mono)" font-size="15" fill="var(--coral)" text-anchor="middle">
+            <text x="163" y="38">§</text><text x="189" y="38">#</text><text x="215" y="38">¤</text>
+            <text x="163" y="64">λ</text><text x="189" y="64">%</text><text x="215" y="64">?</text>
+            <text x="163" y="90">@</text><text x="189" y="90">!</text><text x="215" y="90">¥</text>
+            </g>
+            <g stroke="var(--indigo)" stroke-width="1.6" fill="none">
+            <rect x="252" y="52" width="30" height="24" rx="3"/>
+            <path d="M258 52 v-8 a9 9 0 0 1 18 0 v8"/>
+            </g>
+            </svg>
+            </figure>
+          </li>
+        </ol>
 
-        <article class="project-card reveal" style="--i:1">
-          <span class="project-index">№&nbsp;2</span>
-          <div class="project-visual">
-            <svg class="project-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
-              <line x1="20" y1="100" x2="280" y2="100" stroke="var(--mist)" stroke-width="1.2" opacity="0.55"/>
-              <line x1="20" y1="14" x2="20" y2="100" stroke="var(--mist)" stroke-width="1.2" opacity="0.55"/>
-              <g fill="var(--indigo)" opacity="0.75">
-                <circle cx="30" cy="88" r="2.4"/><circle cx="45" cy="80" r="2.4"/><circle cx="55" cy="90" r="2.4"/>
-                <circle cx="70" cy="78" r="2.4"/><circle cx="85" cy="70" r="2.4"/><circle cx="100" cy="82" r="2.4"/>
-                <circle cx="115" cy="65" r="2.4"/><circle cx="132" cy="60" r="2.4"/><circle cx="148" cy="68" r="2.4"/>
-                <circle cx="163" cy="50" r="2.4"/><circle cx="180" cy="55" r="2.4"/><circle cx="198" cy="42" r="2.4"/>
-                <circle cx="218" cy="48" r="2.4"/><circle cx="238" cy="30" r="2.4"/>
-              </g>
-              <path d="M24,96 C90,74 180,44 276,20" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
-            </svg>
+        <aside class="sommaire-figure" aria-hidden="true">
+          <div class="plate">
+            <div class="plate-head">
+              <span>Fig.&nbsp;3</span>
+              <span class="sf-label">01 · Football</span>
+            </div>
+            <div class="sf-stage"></div>
           </div>
-          <h3>Kaggle&nbsp;: Calories Burned</h3>
-          <p>Playground Series : feature engineering avancé et modèles de régression
-          (Ridge, Random Forest, XGBoost) avec optimisation d'hyperparamètres.</p>
-          <div class="tags"><span>Kaggle</span><span>Régression</span><span>ML</span></div>
-        </article>
-
-        <article class="project-card reveal" style="--i:2">
-          <span class="project-index">№&nbsp;3</span>
-          <div class="project-visual">
-            <svg class="project-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
-              <g fill="var(--indigo)" opacity="0.7">
-                <circle cx="120" cy="50" r="2.3"/><circle cx="135" cy="60" r="2.3"/><circle cx="150" cy="45" r="2.3"/>
-                <circle cx="140" cy="70" r="2.3"/><circle cx="160" cy="65" r="2.3"/><circle cx="125" cy="65" r="2.3"/>
-                <circle cx="155" cy="55" r="2.3"/><circle cx="145" cy="40" r="2.3"/><circle cx="170" cy="50" r="2.3"/>
-                <circle cx="130" cy="80" r="2.3"/><circle cx="165" cy="75" r="2.3"/><circle cx="110" cy="60" r="2.3"/>
-                <circle cx="180" cy="60" r="2.3"/><circle cx="148" cy="85" r="2.3"/><circle cx="118" cy="75" r="2.3"/>
-                <circle cx="175" cy="40" r="2.3"/><circle cx="105" cy="45" r="2.3"/><circle cx="190" cy="70" r="2.3"/>
-              </g>
-              <g fill="var(--coral)">
-                <circle cx="40" cy="25" r="2.6"/>
-                <circle cx="255" cy="30" r="2.6"/>
-                <circle cx="240" cy="95" r="2.6"/>
-              </g>
-              <g fill="none" stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="2.5 3" opacity="0.85">
-                <circle cx="40" cy="25" r="10"/>
-                <circle cx="255" cy="30" r="10"/>
-                <circle cx="240" cy="95" r="10"/>
-              </g>
-            </svg>
-          </div>
-          <h3>Zindi&nbsp;: détection de fraude</h3>
-          <p>Fraude sur consommation d'électricité &amp; gaz : gestion du déséquilibre
-          de classes (SMOTE), classification et évaluation rigoureuse.</p>
-          <div class="tags"><span>Zindi</span><span>Classification</span><span>SMOTE</span></div>
-        </article>
-
-        <article class="project-card reveal" style="--i:3">
-          <span class="project-index">№&nbsp;4</span>
-          <div class="project-visual">
-            <svg class="project-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
-              <line x1="18" y1="60" x2="228" y2="60" stroke="var(--mist)" stroke-width="1" opacity="0.4"/>
-              <g stroke="var(--indigo)" stroke-width="3.4" stroke-linecap="round" opacity="0.85">
-                <line x1="20" y1="55" x2="20" y2="65"/>
-                <line x1="32" y1="51" x2="32" y2="69"/>
-                <line x1="44" y1="47" x2="44" y2="73"/>
-                <line x1="56" y1="53" x2="56" y2="67"/>
-                <line x1="68" y1="43" x2="68" y2="77"/>
-                <line x1="80" y1="50" x2="80" y2="70"/>
-                <line x1="104" y1="46" x2="104" y2="74"/>
-                <line x1="116" y1="38" x2="116" y2="82"/>
-                <line x1="140" y1="49" x2="140" y2="71"/>
-                <line x1="152" y1="42" x2="152" y2="78"/>
-                <line x1="164" y1="53" x2="164" y2="67"/>
-                <line x1="176" y1="35" x2="176" y2="85"/>
-                <line x1="200" y1="51" x2="200" y2="69"/>
-                <line x1="212" y1="46" x2="212" y2="74"/>
-                <line x1="224" y1="55" x2="224" y2="65"/>
-              </g>
-              <g stroke="var(--coral)" stroke-width="3.4" stroke-linecap="round">
-                <line x1="92" y1="35" x2="92" y2="85"/>
-                <line x1="128" y1="30" x2="128" y2="90"/>
-                <line x1="188" y1="40" x2="188" y2="80"/>
-              </g>
-              <text x="236" y="65" font-family="var(--font-mono)" font-size="15" fill="var(--indigo)">▸ abc</text>
-            </svg>
-          </div>
-          <h3>ASR&nbsp;: transcription vocale</h3>
-          <p>Prétraitement audio, préparation de jeux de données et entraînement
-          de modèles de reconnaissance automatique de la parole.</p>
-          <div class="tags"><span>NLP</span><span>Audio</span><span>Deep Learning</span></div>
-        </article>
-
-        <article class="project-card reveal" style="--i:4">
-          <span class="project-index">№&nbsp;5</span>
-          <div class="project-visual">
-            <svg class="project-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
-              <g stroke="var(--indigo)" stroke-width="1.1" opacity="0.35">
-                <line x1="70" y1="30" x2="150" y2="20"/><line x1="70" y1="30" x2="150" y2="47"/><line x1="70" y1="30" x2="150" y2="73"/><line x1="70" y1="30" x2="150" y2="100"/>
-                <line x1="70" y1="60" x2="150" y2="20"/><line x1="70" y1="60" x2="150" y2="47"/><line x1="70" y1="60" x2="150" y2="73"/><line x1="70" y1="60" x2="150" y2="100"/>
-                <line x1="70" y1="90" x2="150" y2="20"/><line x1="70" y1="90" x2="150" y2="47"/><line x1="70" y1="90" x2="150" y2="73"/><line x1="70" y1="90" x2="150" y2="100"/>
-                <line x1="150" y1="20" x2="230" y2="40"/><line x1="150" y1="47" x2="230" y2="40"/><line x1="150" y1="73" x2="230" y2="40"/><line x1="150" y1="100" x2="230" y2="40"/>
-                <line x1="150" y1="20" x2="230" y2="80"/><line x1="150" y1="47" x2="230" y2="80"/><line x1="150" y1="73" x2="230" y2="80"/><line x1="150" y1="100" x2="230" y2="80"/>
-              </g>
-              <g stroke="var(--coral)" stroke-width="1.6" opacity="0.9">
-                <line x1="70" y1="30" x2="150" y2="47"/>
-                <line x1="150" y1="47" x2="230" y2="80"/>
-              </g>
-              <g fill="var(--indigo)">
-                <circle cx="70" cy="30" r="5"/><circle cx="70" cy="60" r="5"/><circle cx="70" cy="90" r="5"/>
-                <circle cx="150" cy="20" r="5"/><circle cx="150" cy="73" r="5"/><circle cx="150" cy="100" r="5"/>
-                <circle cx="230" cy="40" r="5"/>
-              </g>
-              <g fill="var(--coral)">
-                <circle cx="150" cy="47" r="5"/>
-                <circle cx="230" cy="80" r="5"/>
-              </g>
-            </svg>
-          </div>
-          <h3>Architectures CNN &amp; RNN</h3>
-          <p>Expérimentations sur la classification d'images (MNIST) et les séquences :
-          réglages d'hyperparamètres et analyse des performances.</p>
-          <div class="tags"><span>CNN</span><span>RNN</span><span>Vision</span></div>
-        </article>
-
-        <article class="project-card reveal" style="--i:5">
-          <span class="project-index">№&nbsp;6</span>
-          <div class="project-visual">
-            <svg class="project-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
-              <g stroke="var(--indigo)" stroke-width="1.2" opacity="0.5">
-                <line x1="25" y1="15" x2="25" y2="105"/><line x1="75" y1="15" x2="75" y2="105"/>
-                <line x1="125" y1="15" x2="125" y2="105"/><line x1="175" y1="15" x2="175" y2="105"/>
-                <line x1="225" y1="15" x2="225" y2="105"/><line x1="275" y1="15" x2="275" y2="105"/>
-                <line x1="25" y1="15" x2="275" y2="15"/><line x1="25" y1="45" x2="275" y2="45"/>
-                <line x1="25" y1="75" x2="275" y2="75"/><line x1="25" y1="105" x2="275" y2="105"/>
-              </g>
-              <circle cx="50" cy="30" r="5" fill="none" stroke="var(--indigo)" stroke-width="1.6"/>
-              <path d="M245 82 l5 8 l5 -8 l-8 3 l6 0 Z" fill="var(--coral)" stroke="var(--coral)" stroke-width="1" stroke-linejoin="round"/>
-              <g stroke="var(--coral)" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.9">
-                <line x1="50" y1="30" x2="95" y2="30"/><path d="M95 30 l-6 -4 M95 30 l-6 4"/>
-                <line x1="100" y1="30" x2="100" y2="60"/><path d="M100 60 l-4 -6 M100 60 l4 -6"/>
-                <line x1="100" y1="60" x2="145" y2="60"/><path d="M145 60 l-6 -4 M145 60 l-6 4"/>
-                <line x1="150" y1="60" x2="150" y2="90"/><path d="M150 90 l-4 -6 M150 90 l4 -6"/>
-                <line x1="150" y1="90" x2="245" y2="90"/><path d="M245 90 l-6 -4 M245 90 l-6 4"/>
-              </g>
-            </svg>
-          </div>
-          <h3>Q-Learning&nbsp;: renforcement</h3>
-          <p>Agent d'apprentissage par renforcement sur environnement simple :
-          exploration/exploitation et analyse de convergence.</p>
-          <div class="tags"><span>RL</span><span>Q-Learning</span><span>Python</span></div>
-        </article>
-
-        <article class="project-card reveal" style="--i:6">
-          <span class="project-index">№&nbsp;7</span>
-          <div class="project-visual">
-            <svg class="project-svg" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
-              <g stroke="var(--indigo)" stroke-width="1.3" fill="none" opacity="0.7">
-                <rect x="10" y="20" width="78" height="78"/>
-                <line x1="36" y1="20" x2="36" y2="98"/><line x1="62" y1="20" x2="62" y2="98"/>
-                <line x1="10" y1="46" x2="88" y2="46"/><line x1="10" y1="72" x2="88" y2="72"/>
-              </g>
-              <g font-family="var(--font-mono)" font-size="15" fill="var(--indigo)" text-anchor="middle">
-                <text x="23" y="38">A</text><text x="49" y="38">K</text><text x="75" y="38">X</text>
-                <text x="23" y="64">M</text><text x="49" y="64">R</text><text x="75" y="64">Q</text>
-                <text x="23" y="90">T</text><text x="49" y="90">G</text><text x="75" y="90">Z</text>
-              </g>
-              <g stroke="var(--coral)" stroke-width="1.8" stroke-linecap="round" fill="none">
-                <line x1="102" y1="59" x2="140" y2="59"/><path d="M140 59 l-7 -5 M140 59 l-7 5"/>
-              </g>
-              <g stroke="var(--coral)" stroke-width="1.3" fill="none" opacity="0.8">
-                <rect x="150" y="20" width="78" height="78"/>
-                <line x1="176" y1="20" x2="176" y2="98"/><line x1="202" y1="20" x2="202" y2="98"/>
-                <line x1="150" y1="46" x2="228" y2="46"/><line x1="150" y1="72" x2="228" y2="72"/>
-              </g>
-              <g font-family="var(--font-mono)" font-size="15" fill="var(--coral)" text-anchor="middle">
-                <text x="163" y="38">§</text><text x="189" y="38">#</text><text x="215" y="38">¤</text>
-                <text x="163" y="64">λ</text><text x="189" y="64">%</text><text x="215" y="64">?</text>
-                <text x="163" y="90">@</text><text x="189" y="90">!</text><text x="215" y="90">¥</text>
-              </g>
-              <g stroke="var(--indigo)" stroke-width="1.6" fill="none">
-                <rect x="252" y="52" width="30" height="24" rx="3"/>
-                <path d="M258 52 v-8 a9 9 0 0 1 18 0 v8"/>
-              </g>
-            </svg>
-          </div>
-          <h3>Chiffrement par matrice de Hill</h3>
-          <p>Application de chiffrement/déchiffrement : génération de clés,
-          interface mobile-friendly, robustesse en cours d'amélioration.</p>
-          <div class="tags"><span>Crypto</span><span>App</span><span>Sécurité</span></div>
-        </article>
-
-        <article class="project-card project-card--next reveal" style="--i:7">
-          <span class="project-index">№&nbsp;8</span>
-          <div class="project-visual project-visual--next">
-            <svg class="project-svg project-svg--next" viewBox="0 0 300 120" aria-hidden="true" focusable="false">
-              <g class="next-line" stroke-width="1.2" stroke-dasharray="1 4.5" stroke-linecap="round" opacity="0.75">
-                <line x1="35" y1="80" x2="80" y2="35"/>
-                <line x1="80" y1="35" x2="140" y2="60"/>
-                <line x1="140" y1="60" x2="120" y2="95"/>
-                <line x1="140" y1="60" x2="200" y2="30"/>
-                <line x1="200" y1="30" x2="245" y2="70"/>
-                <line x1="80" y1="35" x2="200" y2="30"/>
-              </g>
-              <g class="next-dot">
-                <circle cx="35" cy="80" r="3"/><circle cx="80" cy="35" r="3"/><circle cx="120" cy="95" r="3"/>
-                <circle cx="200" cy="30" r="3"/><circle cx="245" cy="70" r="3"/>
-              </g>
-              <circle cx="140" cy="60" r="4.4" fill="var(--coral)"/>
-              <g stroke="var(--coral)" stroke-width="1.8" stroke-linecap="round">
-                <line x1="270" y1="12" x2="270" y2="32"/>
-                <line x1="260" y1="22" x2="280" y2="22"/>
-              </g>
-            </svg>
-          </div>
-          <h3>Et la suite s'écrit…</h3>
-          <p>Projet OIF (IA pour l'orientation des jeunes) en cadrage, et d'autres
-          expérimentations IA en préparation. Revenez bientôt.</p>
-          <div class="tags"><span>En cours</span></div>
-        </article>
+          <p class="plate-caption sf-caption">Des passes, des patterns.</p>
+        </aside>
       </div>
+
+      <p class="sommaire-next reveal"><span class="sommaire-next-label">À suivre</span>
+        Projet OIF d'IA pour l'orientation des jeunes, en cadrage, et d'autres expériences en préparation.</p>
     </section>
 
     <!-- ══════════ 03 · SERVICES ══════════ -->
@@ -667,39 +690,107 @@
       <div class="section-head reveal">
         <span class="folio">04</span>
         <h2 class="section-title">Compétences</h2>
+        <p class="section-lead">Un index, comme à la fin d'un livre : chaque outil renvoie aux projets et aux postes
+        où il a servi. Chaque référence y mène, et au survol elle allume tout ce qu'elle a mobilisé.</p>
       </div>
 
-      <div class="skills-grid">
-        <div class="skill-group reveal" style="--i:0">
-          <h3>Data &amp; IA</h3>
-          <div class="tags tags--lg">
-            <span>Python (pandas, NumPy)</span><span>Scikit-learn</span><span>NLP / LLM</span>
-            <span>Computer Vision</span><span>EDA &amp; Feature Engineering</span>
-            <span>Matplotlib / Seaborn</span><span>STATA</span><span>EViews</span>
+      <div class="skill-index" id="skillIndex">
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">A</span>
+            <ul>
+              <li class="ix-entry" data-src="ql"><span class="ix-term">Apprentissage par renforcement</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#p-qlearning" data-src="ql">Q-Learning</a></span></li>
+            </ul>
           </div>
-        </div>
-
-        <div class="skill-group reveal" style="--i:1">
-          <h3>Données &amp; qualité</h3>
-          <div class="tags tags--lg">
-            <span>SQL / SQL Server (T-SQL)</span><span>Soda</span><span>YAML</span>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">C</span>
+            <ul>
+              <li class="ix-entry" data-src="anip cnn"><span class="ix-term">Computer vision</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#x-anip" data-src="anip">ANIP</a>, <a href="#p-cnn" data-src="cnn">CNN &amp; RNN</a></span></li>
+            </ul>
           </div>
-        </div>
-
-        <div class="skill-group reveal" style="--i:2">
-          <h3>Automatisation &amp; orchestration</h3>
-          <div class="tags tags--lg">
-            <span>Kestra</span><span>Docker</span><span>VBA</span><span>Automatisation Python / Excel</span>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">D</span>
+            <ul>
+              <li class="ix-entry" data-src="asr cnn"><span class="ix-term">Deep learning</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#p-asr" data-src="asr">ASR</a>, <a href="#p-cnn" data-src="cnn">CNN &amp; RNN</a></span></li>
+              <li class="ix-entry" data-src="mys"><span class="ix-term">Docker</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#f-mysanvi" data-src="mys">MYSANVI</a></span></li>
+            </ul>
           </div>
-        </div>
-
-        <div class="skill-group reveal" style="--i:3">
-          <h3>Visualisation, web &amp; outils</h3>
-          <div class="tags tags--lg">
-            <span>Power BI</span><span>Excel</span><span>HTML / CSS / JS</span>
-            <span>Git / GitHub</span><span>Jupyter / Colab</span><span>VS Code</span>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">E</span>
+            <ul>
+              <li class="ix-entry" data-src="kag zin free"><span class="ix-term">EDA &amp; feature engineering</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#p-kaggle" data-src="kag">Kaggle</a>, <a href="#p-zindi" data-src="zin">Zindi</a>, <a href="#x-freelance" data-src="free">Freelance</a></span></li>
+              <li class="ix-entry" data-src="moov free"><span class="ix-term">Excel &amp; VBA</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#x-moov" data-src="moov">Moov</a>, <a href="#x-freelance" data-src="free">Freelance</a></span></li>
+              <li class="ix-entry" data-src="lic free"><span class="ix-term">EViews &amp; STATA</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#x-licence" data-src="lic">Licence</a>, <a href="#x-freelance" data-src="free">Freelance</a></span></li>
+            </ul>
           </div>
-        </div>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">F</span>
+            <ul>
+              <li class="ix-entry" data-src="brand mys"><span class="ix-term">FedaPay</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#f-brand" data-src="brand">The Brand Ateliers</a>, <a href="#f-mysanvi" data-src="mys">MYSANVI</a></span></li>
+            </ul>
+          </div>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">G</span>
+            <ul>
+              <li class="ix-entry" data-src="st mys"><span class="ix-term">Git &amp; GitHub</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#f-skilltree" data-src="st">skilltree</a>, <a href="#f-mysanvi" data-src="mys">MYSANVI</a></span></li>
+            </ul>
+          </div>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">H</span>
+            <ul>
+              <li class="ix-entry" data-src="site dclic"><span class="ix-term">HTML, CSS &amp; JS</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#accueil" data-src="site">ce site</a>, <a href="#x-dclic" data-src="dclic">D-CLIC</a></span></li>
+            </ul>
+          </div>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">J</span>
+            <ul>
+              <li class="ix-entry" data-src="foot"><span class="ix-term">Jupyter</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#p-football" data-src="foot">Football</a></span></li>
+            </ul>
+          </div>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">K</span>
+            <ul>
+              <li class="ix-entry" data-src="anip"><span class="ix-term">Kestra</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#x-anip" data-src="anip">ANIP</a></span></li>
+            </ul>
+          </div>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">M</span>
+            <ul>
+              <li class="ix-entry" data-src="foot"><span class="ix-term">Matplotlib &amp; Seaborn</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#p-football" data-src="foot">Football</a></span></li>
+            </ul>
+          </div>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">N</span>
+            <ul>
+              <li class="ix-entry" data-src="brand mys"><span class="ix-term">Next.js &amp; TypeScript</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#f-brand" data-src="brand">The Brand Ateliers</a>, <a href="#f-mysanvi" data-src="mys">MYSANVI</a></span></li>
+              <li class="ix-entry" data-src="anip"><span class="ix-term">NLP &amp; LLM</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#x-anip" data-src="anip">ANIP</a></span></li>
+            </ul>
+          </div>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">P</span>
+            <ul>
+              <li class="ix-entry" data-src="foot kag zin"><span class="ix-term">Pandas &amp; NumPy</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#p-football" data-src="foot">Football</a>, <a href="#p-kaggle" data-src="kag">Kaggle</a>, <a href="#p-zindi" data-src="zin">Zindi</a></span></li>
+              <li class="ix-entry" data-src="mys"><span class="ix-term">Payload CMS</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#f-mysanvi" data-src="mys">MYSANVI</a></span></li>
+              <li class="ix-entry" data-src="mys"><span class="ix-term">Playwright</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#f-mysanvi" data-src="mys">MYSANVI</a></span></li>
+              <li class="ix-entry" data-src="brand mys"><span class="ix-term">PostgreSQL</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#f-brand" data-src="brand">The Brand Ateliers</a>, <a href="#f-mysanvi" data-src="mys">MYSANVI</a></span></li>
+              <li class="ix-entry" data-src="anip"><span class="ix-term">Power BI</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#x-anip" data-src="anip">ANIP</a></span></li>
+              <li class="ix-entry" data-src="brand"><span class="ix-term">Prisma</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#f-brand" data-src="brand">The Brand Ateliers</a></span></li>
+              <li class="ix-entry" data-src="anip st foot kag free"><span class="ix-term">Python</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#x-anip" data-src="anip">ANIP</a>, <a href="#f-skilltree" data-src="st">skilltree</a>, <a href="#p-football" data-src="foot">Football</a>, <a href="#p-kaggle" data-src="kag">Kaggle</a>, <a href="#x-freelance" data-src="free">Freelance</a></span></li>
+            </ul>
+          </div>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">S</span>
+            <ul>
+              <li class="ix-entry" data-src="kag zin"><span class="ix-term">Scikit-learn</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#p-kaggle" data-src="kag">Kaggle</a>, <a href="#p-zindi" data-src="zin">Zindi</a></span></li>
+              <li class="ix-entry" data-src="anip"><span class="ix-term">Soda</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#x-anip" data-src="anip">ANIP</a></span></li>
+              <li class="ix-entry" data-src="anip"><span class="ix-term">SQL (dont T-SQL)</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#x-anip" data-src="anip">ANIP</a></span></li>
+            </ul>
+          </div>
+          <div class="ix-group">
+            <span class="ix-letter" aria-hidden="true">X</span>
+            <ul>
+              <li class="ix-entry" data-src="kag"><span class="ix-term">XGBoost &amp; Random Forest</span><span class="ix-lead" aria-hidden="true"></span><span class="ix-refs"><a href="#p-kaggle" data-src="kag">Kaggle</a></span></li>
+            </ul>
+          </div>
       </div>
     </section>
 
@@ -714,7 +805,7 @@
         <div class="timeline-col reveal">
           <h3 class="timeline-heading">Expériences</h3>
 
-          <div class="tl-item tl-item--current">
+          <div class="tl-item tl-item--current" id="x-anip">
             <span class="tl-date">Avr. 2026 – auj.</span>
             <h4>Stagiaire Data Scientist <span class="badge-live">en cours</span></h4>
             <p class="tl-org">ANIP, Agence nationale d'identification des personnes</p>
@@ -722,7 +813,7 @@
             normalisation de données, dashboards Power BI de suivi qualité.</p>
           </div>
 
-          <div class="tl-item">
+          <div class="tl-item" id="x-moov">
             <span class="tl-date">Mars 2026 · 3 sem.</span>
             <h4>Mission d'automatisation Excel / VBA</h4>
             <p class="tl-org">Moov Africa Bénin</p>
@@ -730,7 +821,7 @@
             le reporting interne.</p>
           </div>
 
-          <div class="tl-item">
+          <div class="tl-item" id="x-freelance">
             <span class="tl-date">2018 – 2025</span>
             <h4>Data Analyst &amp; Statisticien freelance</h4>
             <p class="tl-org">Indépendant, Bénin</p>
@@ -764,7 +855,7 @@
             <p>Machine learning, big data, deep learning, traitement du signal.</p>
           </div>
 
-          <div class="tl-item">
+          <div class="tl-item" id="x-licence">
             <span class="tl-date">2023</span>
             <h4>Licence Économétrie &amp; Statistiques Appliquées</h4>
             <p class="tl-org">FASEG/UAC/LESA · <strong>Mention Très Bien</strong> à la soutenance</p>
@@ -773,7 +864,7 @@
 
           <h3 class="timeline-heading timeline-heading--sub">Certifications</h3>
 
-          <div class="tl-item">
+          <div class="tl-item" id="x-dclic">
             <span class="tl-date">En cours</span>
             <h4>D-CLIC, Développement Web (niveau intermédiaire)</h4>
             <p class="tl-org">Organisation Internationale de la Francophonie</p>
@@ -798,22 +889,22 @@
       <div class="hobbies-row">
         <div class="hobby reveal" style="--i:0">
           <span class="hobby-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5 l4.2 3 -1.6 4.9 h-5.2 l-1.6 -4.9 Z"/><path d="M12 7.5 V3.2 M16.2 10.5 l4.3 -1.4 M14.6 15.4 l2.7 3.7 M9.4 15.4 l-2.7 3.7 M7.8 10.5 L3.5 9.1"/></svg></span>
-          <h4>Football</h4>
+          <h3>Football</h3>
           <p>Supporter passionné, et les stats de match, évidemment.</p>
         </div>
         <div class="hobby reveal" style="--i:1">
           <span class="hobby-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5 C9.5 4.8 6 4.5 3 5 v13.5 c3 -0.5 6.5 -0.2 9 1.5 c2.5 -1.7 6 -2 9 -1.5 V5 c-3 -0.5 -6.5 -0.2 -9 1.5 Z"/><line x1="12" y1="6.5" x2="12" y2="20"/><path d="M6 9 h3 M6 12 h3 M15 9 h3"/></svg></span>
-          <h4>Culture manga</h4>
+          <h3>Culture manga</h3>
           <p>Grand lecteur : la narration japonaise n'a pas d'égale.</p>
         </div>
         <div class="hobby reveal" style="--i:2">
           <span class="hobby-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8.5" width="7" height="7" rx="1.5"/><rect x="14.5" y="8.5" width="7" height="7" rx="1.5"/><line x1="9.5" y1="12" x2="14.5" y2="12"/><path d="M6 8.5 V5 h12 v3.5 M6 15.5 V19 h12 v-3.5"/></svg></span>
-          <h4>Crypto &amp; blockchain</h4>
+          <h3>Crypto &amp; blockchain</h3>
           <p>Curieux des technologies décentralisées.</p>
         </div>
         <div class="hobby reveal" style="--i:3">
           <span class="hobby-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 L5 5 h14 l2 5.5"/><path d="M3 10.5 c0 1.7 1.3 3 3 3 s3 -1.3 3 -3 c0 1.7 1.3 3 3 3 s3 -1.3 3 -3 c0 1.7 1.3 3 3 3 s3 -1.3 3 -3"/><path d="M5 13 V20 h14 V13"/><path d="M10 20 v-4 h4 v4"/></svg></span>
-          <h4>Entrepreneuriat</h4>
+          <h3>Entrepreneuriat</h3>
           <p>Commerce familial depuis 2016, et PRESSO, mon agence, depuis fin 2025.</p>
         </div>
       </div>
@@ -822,6 +913,13 @@
     <!-- ══════════ 07 · CONTACT ══════════ -->
     <section id="contact" class="section section--contact">
       <div class="contact-panel reveal">
+        <svg class="postmark" viewBox="0 0 160 160" aria-hidden="true">
+          <defs><path id="pmCircle" d="M80 80 m-56 0 a56 56 0 1 1 112 0 a56 56 0 1 1 -112 0"/></defs>
+          <circle cx="80" cy="80" r="70" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="80" cy="80" r="44" fill="none" stroke="currentColor" stroke-width="1.2"/>
+          <text font-family="Spline Sans Mono, monospace" font-size="11.5" letter-spacing="3.1" fill="currentColor"><textPath href="#pmCircle">ABOMEY-CALAVI · BÉNIN · 2026 · </textPath></text>
+          <text x="80" y="92" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="800" font-size="36" fill="currentColor">P.</text>
+        </svg>
         <div class="contact-intro">
           <span class="folio folio--light">07</span>
           <h2>Un projet en tête&nbsp;?<br><em>Écrivez-moi.</em></h2>
@@ -858,26 +956,26 @@
           <div class="form-row">
             <div class="form-group">
               <label for="nom">Nom &amp; prénom</label>
-              <input type="text" id="nom" name="nom" placeholder="Ex. Aïcha Godonou" required>
-              <span class="error-message"></span>
+              <input type="text" id="nom" name="nom" placeholder="Ex. Aïcha Godonou" aria-describedby="err-nom" required>
+              <span class="error-message" id="err-nom" aria-live="polite"></span>
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="vous@exemple.com" required>
-              <span class="error-message"></span>
+              <input type="email" id="email" name="email" placeholder="vous@exemple.com" aria-describedby="err-email" required>
+              <span class="error-message" id="err-email" aria-live="polite"></span>
             </div>
           </div>
 
           <div class="form-group">
             <label for="sujet">Sujet</label>
-            <input type="text" id="sujet" name="sujet" placeholder="De quoi s'agit-il ?" required>
-            <span class="error-message"></span>
+            <input type="text" id="sujet" name="sujet" placeholder="De quoi s'agit-il ?" aria-describedby="err-sujet" required>
+            <span class="error-message" id="err-sujet" aria-live="polite"></span>
           </div>
 
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" rows="6" placeholder="Racontez-moi votre projet…" required></textarea>
-            <span class="error-message"></span>
+            <textarea id="message" name="message" rows="6" placeholder="Racontez-moi votre projet…" aria-describedby="err-message" required></textarea>
+            <span class="error-message" id="err-message" aria-live="polite"></span>
           </div>
 
           <button type="submit" class="btn btn--coral btn--full" id="submitBtn">Envoyer le message</button>
@@ -894,8 +992,8 @@
 
   <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>(function(){ emailjs.init("MPIGnT1kXc48OD8Kh"); })();</script>
+  <script>if (window.emailjs) emailjs.init("MPIGnT1kXc48OD8Kh"); // sinon le formulaire affiche un message d'échec</script>
 
-  <script src="script.js?v=20261021"></script>
+  <script src="script.js?v=20261022"></script>
 </body>
 </html>
