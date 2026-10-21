@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio de TOTON Péniel-Prestige (Presso) — Data Scientist Junior · IA & Automatisation · Bénin">
-  <title>TOTON Péniel-Prestige (Presso) — Data & IA</title>
+  <meta name="description" content="Portfolio de Péniel-Prestige Toton (Presso) : data science, IA et automatisation, depuis Abomey-Calavi au Bénin.">
+  <title>Péniel-Prestige Toton (Presso) | Data &amp; IA</title>
   <meta name="theme-color" content="#f7f4ed" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#12172a" media="(prefers-color-scheme: dark)">
 
   <!-- Partage réseaux sociaux / WhatsApp / LinkedIn -->
   <meta property="og:type" content="profile">
-  <meta property="og:site_name" content="Péniel Toton — Portfolio">
-  <meta property="og:title" content="Péniel Toton (Presso) — Data Scientist Junior · IA & Automatisation">
-  <meta property="og:description" content="Économétrie, machine learning et automatisation — pipelines fiables et modèles d'IA (LLM, NLP, vision) pour des problèmes bien réels. Abomey-Calavi, Bénin.">
+  <meta property="og:site_name" content="Péniel Toton, portfolio">
+  <meta property="og:title" content="Péniel Toton (Presso) | Data science, IA &amp; automatisation">
+  <meta property="og:description" content="Économétrie, machine learning et automatisation : pipelines fiables et modèles d'IA (LLM, NLP, vision) pour des problèmes bien réels. Abomey-Calavi, Bénin.">
   <meta property="og:url" content="https://presso30.github.io/portfolio/">
   <meta property="og:image" content="https://presso30.github.io/portfolio/og-image.png">
   <meta property="og:locale" content="fr_FR">
@@ -29,8 +29,8 @@
     "@type": "Person",
     "name": "Péniel-Prestige Toton",
     "alternateName": "Presso",
-    "jobTitle": "Data Scientist Junior",
-    "description": "Data scientist junior formé en économétrie et en IA & Big Data — machine learning, NLP/LLM, vision par ordinateur, automatisation.",
+    "jobTitle": "Stagiaire Data Scientist",
+    "description": "Formé en économétrie et en IA & Big Data : machine learning, NLP/LLM, vision par ordinateur, automatisation.",
     "url": "https://presso30.github.io/portfolio/",
     "image": "https://presso30.github.io/portfolio/profile-photo.jpg",
     "email": "penieltoton51@gmail.com",
@@ -51,7 +51,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Hanken+Grotesk:ital,wght@0,300..800;1,300..800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=20260711">
+  <link rel="stylesheet" href="style.css?v=20261021">
 </head>
 <body>
 
@@ -60,7 +60,7 @@
     <div class="nav-inner">
       <a href="#accueil" class="logo">
         <span class="logo-mark">P.</span>
-        <span class="logo-name">Toton<em>&nbsp;— folio</em></span>
+        <span class="logo-name">Toton<em>&nbsp;/ folio</em></span>
       </a>
 
       <ul class="nav-menu" id="navMenu">
@@ -86,13 +86,12 @@
 
   <!-- ══════════ HERO ══════════ -->
   <header id="accueil" class="hero">
-    <canvas id="dataField" class="hero-canvas" aria-hidden="true"></canvas>
 
     <div class="hero-inner">
       <div class="hero-text">
         <p class="hero-eyebrow load-reveal" style="--d:0">
           <span class="eyebrow-dot" aria-hidden="true"></span>
-          Data Scientist Junior · Abomey-Calavi, Bénin
+          Data, IA &amp; automatisation · Abomey-Calavi
         </p>
 
         <h1 class="hero-title">
@@ -102,7 +101,7 @@
         </h1>
 
         <p class="hero-subtitle load-reveal" style="--d:4">
-          Économétrie, machine learning et automatisation — je conçois des pipelines
+          Économétrie, machine learning et automatisation : je conçois des pipelines
           fiables et j'explore les modèles d'IA (LLM, NLP, vision) pour résoudre
           des problèmes bien réels.
         </p>
@@ -113,22 +112,33 @@
         </div>
       </div>
 
-      <figure class="hero-portrait load-reveal" style="--d:3">
-        <div class="portrait-stack">
-          <div class="portrait-frame" data-pos="2">
-            <img src="photo-presso-3.jpg"
-                 alt="Péniel Toton" width="310" height="388" loading="lazy" style="object-position:50% 8%;">
+      <figure class="hero-plate load-reveal" style="--d:3">
+        <div class="plate">
+          <div class="plate-head">
+            <span>Fig.&nbsp;1</span>
+            <span class="plate-n">n&nbsp;=&nbsp;42</span>
           </div>
-          <div class="portrait-frame" data-pos="1">
-            <img src="photo-presso-2.jpg"
-                 alt="Péniel Toton" width="310" height="388" loading="lazy" style="object-position:50% 12%;">
-          </div>
-          <div class="portrait-frame" data-pos="0">
-            <img src="photo-presso-1.jpg"
-                 alt="Photo de Péniel Toton" width="310" height="388" style="object-position:50% 18%;">
-          </div>
+          <svg class="plate-svg" id="plateSvg" viewBox="0 0 360 290" role="img"
+               aria-label="Un nuage de points en désordre s'aligne sur une tendance, puis se range en colonnes dont la plus haute ressort en corail.">
+            <g class="plate-grid">
+              <line x1="30" y1="70" x2="345" y2="70"/>
+              <line x1="30" y1="130" x2="345" y2="130"/>
+              <line x1="30" y1="190" x2="345" y2="190"/>
+            </g>
+            <g class="plate-axes">
+              <line x1="30" y1="22" x2="30" y2="262"/>
+              <line x1="30" y1="262" x2="345" y2="262"/>
+            </g>
+            <path class="plate-trend" d="M38 240 L340 64" pathLength="1"/>
+            <g class="plate-points"></g>
+          </svg>
+          <ol class="plate-steps">
+            <li data-step="0">Brut</li>
+            <li data-step="1">Structuré</li>
+            <li data-step="2">Décidé</li>
+          </ol>
         </div>
-        <figcaption class="portrait-tag">« Presso »</figcaption>
+        <figcaption class="plate-caption">Du bruit à la décision.</figcaption>
       </figure>
     </div>
 
@@ -155,13 +165,13 @@
 
       <div class="about-grid">
         <div class="about-text reveal">
-          <p class="lede">Je m'appelle <strong>Péniel-Prestige Toton</strong> — data practitioner
-          formé à l'économétrie, tombé amoureux de l'intelligence artificielle.</p>
+          <p class="lede">Je m'appelle <strong>Péniel-Prestige Toton</strong>, data practitioner
+          formé à l'économétrie et tombé amoureux de l'intelligence artificielle.</p>
 
           <p>Après une licence en <strong>Économétrie &amp; Statistiques Appliquées</strong> (FASEG/UAC, 2023)
           et un <strong>Master&nbsp;1 IA &amp; Big Data</strong> (2025, mention Bien), je travaille aujourd'hui
           comme <strong>stagiaire Data Scientist à l'ANIP</strong>, l'agence nationale d'identification
-          des personnes du Bénin — vision par ordinateur, NLP et qualité de données à l'échelle nationale.</p>
+          des personnes du Bénin : vision par ordinateur, NLP et qualité de données à l'échelle nationale.</p>
 
           <p>Mon fil rouge : partir de données imparfaites, en faire quelque chose d'utile,
           et automatiser tout ce qui mérite de l'être. Des enquêtes de terrain aux modèles
@@ -184,7 +194,7 @@
           </div>
           <div class="fact">
             <span class="fact-num" data-count="3">3</span>
-            <span class="fact-label">stages — Trésor, Moov, ANIP</span>
+            <span class="fact-label">stages : Trésor, Moov, ANIP</span>
           </div>
           <div class="fact">
             <span class="fact-num" data-count="2">2</span>
@@ -199,8 +209,123 @@
       <div class="section-head reveal">
         <span class="folio">02</span>
         <h2 class="section-title">Projets choisis</h2>
-        <p class="section-lead">Compétitions, expérimentations et applications — la donnée sous toutes ses formes.</p>
+        <p class="section-lead">Projets clients, compétitions et expérimentations : la donnée sous toutes ses formes.</p>
       </div>
+
+      <div class="features">
+        <article class="feature reveal">
+          <div class="feature-visual">
+            <svg class="feature-svg" viewBox="0 0 400 240" aria-hidden="true" focusable="false">
+              <rect x="30" y="24" width="340" height="192" rx="8" fill="none" stroke="var(--indigo)" stroke-width="1.6"/>
+              <line x1="30" y1="46" x2="370" y2="46" stroke="var(--indigo)" stroke-width="1.2" opacity="0.6"/>
+              <g fill="var(--indigo)" opacity="0.55"><circle cx="44" cy="35" r="3"/><circle cx="56" cy="35" r="3"/><circle cx="68" cy="35" r="3"/></g>
+              <rect x="50" y="64" width="150" height="10" rx="2" fill="var(--indigo)" opacity="0.8"/>
+              <rect x="50" y="82" width="110" height="6" rx="2" fill="var(--indigo)" opacity="0.35"/>
+              <rect x="50" y="98" width="62" height="16" rx="8" fill="var(--coral)"/>
+              <g fill="none" stroke="var(--indigo)" stroke-width="1.3" opacity="0.7">
+                <rect x="50" y="134" width="44" height="60" rx="3"/>
+                <rect x="104" y="134" width="44" height="60" rx="3"/>
+                <rect x="158" y="134" width="44" height="60" rx="3"/>
+              </g>
+              <g stroke="var(--indigo)" stroke-width="1" opacity="0.45">
+                <line x1="58" y1="182" x2="86" y2="182"/><line x1="112" y1="182" x2="140" y2="182"/><line x1="166" y1="182" x2="194" y2="182"/>
+              </g>
+              <g fill="none" stroke="var(--indigo)" stroke-width="1.2" opacity="0.7">
+                <rect x="236" y="64" width="114" height="130" rx="4"/>
+                <line x1="236" y1="84" x2="350" y2="84"/>
+              </g>
+              <g fill="var(--indigo)" opacity="0.35">
+                <circle cx="252" cy="102" r="3"/><circle cx="273" cy="102" r="3"/><circle cx="294" cy="102" r="3"/><circle cx="315" cy="102" r="3"/><circle cx="336" cy="102" r="3"/>
+                <circle cx="252" cy="124" r="3"/><circle cx="273" cy="124" r="3"/><circle cx="315" cy="124" r="3"/><circle cx="336" cy="124" r="3"/>
+                <circle cx="252" cy="146" r="3"/><circle cx="273" cy="146" r="3"/><circle cx="294" cy="146" r="3"/><circle cx="315" cy="146" r="3"/><circle cx="336" cy="146" r="3"/>
+                <circle cx="252" cy="168" r="3"/><circle cx="273" cy="168" r="3"/>
+              </g>
+              <circle cx="294" cy="124" r="7" fill="var(--coral)"/>
+            </svg>
+          </div>
+          <div class="feature-body">
+            <p class="feature-meta">Juil. – oct. 2026 · Projet client PRESSO</p>
+            <h3>The Brand Ateliers</h3>
+            <p>Plateforme web complète : vitrine de services, boutique d'e-books en plusieurs devises,
+            réservation de circuits touristiques, blog et back-office d'administration.</p>
+            <div class="tags"><span>Next.js 16</span><span>TypeScript</span><span>Prisma · PostgreSQL</span><span>Sanity</span><span>FedaPay</span></div>
+          </div>
+        </article>
+
+        <article class="feature reveal">
+          <div class="feature-visual">
+            <svg class="feature-svg" viewBox="0 0 400 240" aria-hidden="true" focusable="false">
+              <rect x="146" y="14" width="108" height="212" rx="16" fill="none" stroke="var(--indigo)" stroke-width="1.6"/>
+              <line x1="186" y1="26" x2="214" y2="26" stroke="var(--indigo)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+              <g fill="none" stroke="var(--indigo)" stroke-width="1.2" opacity="0.7">
+                <rect x="160" y="42" width="38" height="44" rx="4"/><rect x="202" y="42" width="38" height="44" rx="4"/>
+                <rect x="160" y="96" width="38" height="44" rx="4"/><rect x="202" y="96" width="38" height="44" rx="4"/>
+              </g>
+              <g fill="none" stroke="var(--coral)" stroke-width="1.4">
+                <circle cx="179" cy="62" r="9"/><path d="M215 70 q6 -16 12 0"/><rect x="171" y="111" width="16" height="14" rx="3"/><path d="M212 125 l9 -14 l9 14 z"/>
+              </g>
+              <rect x="160" y="152" width="80" height="22" rx="11" fill="var(--coral)"/>
+              <text x="200" y="167" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="#fff" letter-spacing="1">PAYER</text>
+              <text x="200" y="198" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--indigo)" opacity="0.75">F CFA · FedaPay</text>
+              <g stroke="var(--indigo)" stroke-width="1.3" fill="none" opacity="0.6" stroke-linecap="round">
+                <path d="M86 120 h44"/><path d="M122 112 l8 8 l-8 8"/>
+                <path d="M270 120 h44"/><path d="M306 112 l8 8 l-8 8"/>
+              </g>
+              <g fill="none" stroke="var(--indigo)" stroke-width="1.3" opacity="0.7">
+                <rect x="40" y="100" width="36" height="40" rx="4"/>
+                <rect x="324" y="100" width="40" height="40" rx="20"/>
+              </g>
+              <path d="M333 120 l7 7 l13 -14" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <g stroke="var(--indigo)" stroke-width="1" opacity="0.45"><line x1="48" y1="112" x2="68" y2="112"/><line x1="48" y1="120" x2="68" y2="120"/><line x1="48" y1="128" x2="62" y2="128"/></g>
+            </svg>
+          </div>
+          <div class="feature-body">
+            <p class="feature-meta">Depuis oct. 2026 · Projet client PRESSO <span class="badge-live">en cours</span></p>
+            <h3>MYSANVI</h3>
+            <p>Boutique en ligne d'accessoires à Abomey-Calavi, avec paiement FedaPay en FCFA
+            confirmé par webhook signé. Architecture modulaire, décisions documentées, tests
+            unitaires, d'intégration et de bout en bout à chaque modification.</p>
+            <div class="tags"><span>Payload CMS 3</span><span>Next.js</span><span>PostgreSQL</span><span>Playwright</span><span>GitHub Actions</span></div>
+          </div>
+        </article>
+
+        <article class="feature reveal">
+          <div class="feature-visual">
+            <svg class="feature-svg" viewBox="0 0 400 240" aria-hidden="true" focusable="false">
+              <text x="34" y="44" font-family="var(--font-mono)" font-size="12" fill="var(--indigo)" opacity="0.8">$ /skilltree</text>
+              <rect x="122" y="34" width="7" height="13" fill="var(--coral)" class="caret-blink"/>
+              <g fill="none" stroke="var(--indigo)" stroke-width="1.3" opacity="0.6">
+                <path d="M80 200 C 80 160, 150 150, 150 120"/>
+                <path d="M80 200 C 80 160, 230 160, 230 120"/>
+                <path d="M80 200 C 80 170, 310 170, 310 120"/>
+                <path d="M150 120 C 150 100, 120 95, 120 80"/>
+                <path d="M150 120 C 150 100, 180 95, 180 80"/>
+                <path d="M230 120 C 230 100, 230 95, 230 80"/>
+                <path d="M310 120 C 310 100, 285 95, 285 80"/>
+                <path d="M310 120 C 310 100, 340 95, 340 80"/>
+              </g>
+              <circle cx="80" cy="204" r="7" fill="var(--indigo)"/>
+              <g fill="var(--paper-raised)" stroke="var(--indigo)" stroke-width="1.5">
+                <circle cx="150" cy="120" r="5.5"/><circle cx="230" cy="120" r="5.5"/><circle cx="310" cy="120" r="5.5"/>
+                <circle cx="120" cy="78" r="4.5"/><circle cx="230" cy="78" r="4.5"/><circle cx="340" cy="78" r="4.5"/>
+              </g>
+              <g fill="var(--coral)"><circle cx="180" cy="78" r="5"/><circle cx="285" cy="78" r="5"/></g>
+              <text x="96" y="208" font-family="var(--font-mono)" font-size="10" fill="var(--indigo)" opacity="0.6">inventaire.md</text>
+            </svg>
+          </div>
+          <div class="feature-body">
+            <p class="feature-meta">2026 · Open source</p>
+            <h3>skilltree</h3>
+            <p>Plugin Claude Code écrit en Python : il relève les technologies réellement employées
+            sur un projet à partir de preuves (dépendances, historique git, graphe du code)
+            et les cumule projet après projet dans un inventaire prêt pour un CV.</p>
+            <div class="tags"><span>Python</span><span>Claude Code</span><span>Open source</span></div>
+            <a href="https://github.com/Presso30/skilltree" target="_blank" rel="noopener" class="feature-link link-sweep">Voir le dépôt sur GitHub&nbsp;↗</a>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="projects-subhead reveal">Compétitions &amp; expérimentations</h3>
 
       <div class="projects-grid">
         <article class="project-card reveal" style="--i:0">
@@ -249,7 +374,7 @@
               <path d="M24,96 C90,74 180,44 276,20" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
             </svg>
           </div>
-          <h3>Kaggle — Calories Burned</h3>
+          <h3>Kaggle&nbsp;: Calories Burned</h3>
           <p>Playground Series : feature engineering avancé et modèles de régression
           (Ridge, Random Forest, XGBoost) avec optimisation d'hyperparamètres.</p>
           <div class="tags"><span>Kaggle</span><span>Régression</span><span>ML</span></div>
@@ -279,7 +404,7 @@
               </g>
             </svg>
           </div>
-          <h3>Zindi — Détection de fraude</h3>
+          <h3>Zindi&nbsp;: détection de fraude</h3>
           <p>Fraude sur consommation d'électricité &amp; gaz : gestion du déséquilibre
           de classes (SMOTE), classification et évaluation rigoureuse.</p>
           <div class="tags"><span>Zindi</span><span>Classification</span><span>SMOTE</span></div>
@@ -315,7 +440,7 @@
               <text x="236" y="65" font-family="var(--font-mono)" font-size="15" fill="var(--indigo)">▸ abc</text>
             </svg>
           </div>
-          <h3>ASR — Transcription vocale</h3>
+          <h3>ASR&nbsp;: transcription vocale</h3>
           <p>Prétraitement audio, préparation de jeux de données et entraînement
           de modèles de reconnaissance automatique de la parole.</p>
           <div class="tags"><span>NLP</span><span>Audio</span><span>Deep Learning</span></div>
@@ -375,7 +500,7 @@
               </g>
             </svg>
           </div>
-          <h3>Q-Learning — Renforcement</h3>
+          <h3>Q-Learning&nbsp;: renforcement</h3>
           <p>Agent d'apprentissage par renforcement sur environnement simple :
           exploration/exploitation et analyse de convergence.</p>
           <div class="tags"><span>RL</span><span>Q-Learning</span><span>Python</span></div>
@@ -414,7 +539,7 @@
               </g>
             </svg>
           </div>
-          <h3>Chiffrement — Matrice de Hill</h3>
+          <h3>Chiffrement par matrice de Hill</h3>
           <p>Application de chiffrement/déchiffrement : génération de clés,
           interface mobile-friendly, robustesse en cours d'amélioration.</p>
           <div class="tags"><span>Crypto</span><span>App</span><span>Sécurité</span></div>
@@ -456,7 +581,7 @@
       <div class="section-head reveal">
         <span class="folio">03</span>
         <h2 class="section-title">Ce que je peux faire pour vous</h2>
-        <p class="section-lead">Pour les étudiants, entrepreneurs et petites structures —
+        <p class="section-lead">Pour les étudiants, entrepreneurs et petites structures :
         du site web au modèle d'IA, adapté aux réalités béninoises.</p>
       </div>
 
@@ -466,7 +591,7 @@
           <div class="service-body">
             <h3><span class="service-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3 C16 7 16 17 12 21 C8 17 8 7 12 3 Z"/></svg></span>Sites web &amp; e-commerce</h3>
             <p>Sites vitrines modernes et boutiques en ligne avec <strong>paiement Mobile Money</strong>
-            (MTN MoMo, Moov Money) — rapides même en 3G, pensés mobile d'abord.</p>
+            (MTN MoMo, Moov Money), rapides même en 3G et pensés mobile d'abord.</p>
           </div>
           <div class="service-tags"><span>HTML/CSS/JS</span><span>KkiaPay · FedaPay</span></div>
         </li>
@@ -495,7 +620,7 @@
           <span class="service-num">04</span>
           <div class="service-body">
             <h3><span class="service-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="21"/><rect x="5" y="13" width="3.5" height="8"/><rect x="10.5" y="8" width="3.5" height="13"/><rect x="16" y="4" width="3.5" height="17"/></svg></span>Dashboards &amp; pilotage</h3>
-            <p>Vos ventes, votre stock et votre trésorerie en un coup d'œil — tableaux de
+            <p>Vos ventes, votre stock et votre trésorerie en un coup d'œil, avec des tableaux de
             bord clairs qui aident vraiment à décider.</p>
           </div>
           <div class="service-tags"><span>Power BI</span><span>Reporting auto</span></div>
@@ -516,7 +641,7 @@
           <div class="service-body">
             <h3><span class="service-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="12" height="15" rx="1.5"/><line x1="6" y1="7" x2="12" y2="7"/><line x1="6" y1="10.5" x2="12" y2="10.5"/><circle cx="16.5" cy="16.5" r="4"/><line x1="19.4" y1="19.4" x2="22" y2="22"/></svg></span>Analyse de données &amp; études</h3>
             <p>Enquêtes, nettoyage, analyses exploratoires, tests statistiques et rapports
-            limpides — appui académique et professionnel.</p>
+            limpides, en appui académique et professionnel.</p>
           </div>
           <div class="service-tags"><span>EDA</span><span>STATA · EViews</span><span>SQL</span></div>
         </li>
@@ -590,9 +715,9 @@
           <h3 class="timeline-heading">Expériences</h3>
 
           <div class="tl-item tl-item--current">
-            <span class="tl-date">Avr. 2026 — auj.</span>
+            <span class="tl-date">Avr. 2026 – auj.</span>
             <h4>Stagiaire Data Scientist <span class="badge-live">en cours</span></h4>
-            <p class="tl-org">ANIP — Agence Nationale d'Identification des Personnes</p>
+            <p class="tl-org">ANIP, Agence nationale d'identification des personnes</p>
             <p>Vision par ordinateur pour le contrôle qualité, modules NLP/LLM de
             normalisation de données, dashboards Power BI de suivi qualité.</p>
           </div>
@@ -600,21 +725,21 @@
           <div class="tl-item">
             <span class="tl-date">Mars 2026 · 3 sem.</span>
             <h4>Mission d'automatisation Excel / VBA</h4>
-            <p class="tl-org">Moov - Benin</p>
+            <p class="tl-org">Moov Africa Bénin</p>
             <p>Macros VBA pour automatiser des traitements répétitifs et fiabiliser
             le reporting interne.</p>
           </div>
 
           <div class="tl-item">
-            <span class="tl-date">2018 — 2025</span>
-            <h4>Data Analyst &amp; Statisticien — Freelance</h4>
+            <span class="tl-date">2018 – 2025</span>
+            <h4>Data Analyst &amp; Statisticien freelance</h4>
             <p class="tl-org">Indépendant, Bénin</p>
             <p>Enquêtes, analyses statistiques, rapports, visualisations et outils
             d'automatisation pour des clients variés.</p>
           </div>
 
           <div class="tl-item">
-            <span class="tl-date">Janv. — Avr. 2024</span>
+            <span class="tl-date">Janv. – avr. 2024</span>
             <h4>Stagiaire en Analyse de Données</h4>
             <p class="tl-org">Direction Générale du Trésor et de la Comptabilité Publique</p>
             <p>Traitement de données financières publiques et mise à jour de tableaux
@@ -622,10 +747,10 @@
           </div>
 
           <div class="tl-item">
-            <span class="tl-date">2016 — auj.</span>
+            <span class="tl-date">2016 – auj.</span>
             <h4>Commerce familial</h4>
             <p class="tl-org">Gestion opérationnelle</p>
-            <p>Suivi des ventes et gestion courante — l'école du terrain.</p>
+            <p>Suivi des ventes et gestion courante : l'école du terrain.</p>
           </div>
         </div>
 
@@ -634,14 +759,14 @@
 
           <div class="tl-item">
             <span class="tl-date">2025</span>
-            <h4>Master 1 — Intelligence Artificielle &amp; Big Data</h4>
+            <h4>Master 1 Intelligence Artificielle &amp; Big Data</h4>
             <p class="tl-org">Pigier Bénin · <strong>Mention Bien</strong></p>
             <p>Machine learning, big data, deep learning, traitement du signal.</p>
           </div>
 
           <div class="tl-item">
             <span class="tl-date">2023</span>
-            <h4>Licence — Économétrie &amp; Statistiques Appliquées</h4>
+            <h4>Licence Économétrie &amp; Statistiques Appliquées</h4>
             <p class="tl-org">FASEG/UAC/LESA · <strong>Mention Très Bien</strong> à la soutenance</p>
             <p>Mémoire : effet du capital humain sur l'accès à l'emploi des jeunes au Bénin.</p>
           </div>
@@ -650,7 +775,7 @@
 
           <div class="tl-item">
             <span class="tl-date">En cours</span>
-            <h4>D-CLIC — Développement Web, niveau intermédiaire</h4>
+            <h4>D-CLIC, Développement Web (niveau intermédiaire)</h4>
             <p class="tl-org">Organisation Internationale de la Francophonie</p>
           </div>
 
@@ -672,24 +797,24 @@
 
       <div class="hobbies-row">
         <div class="hobby reveal" style="--i:0">
-          <span class="hobby-emoji" aria-hidden="true">⚽</span>
+          <span class="hobby-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5 l4.2 3 -1.6 4.9 h-5.2 l-1.6 -4.9 Z"/><path d="M12 7.5 V3.2 M16.2 10.5 l4.3 -1.4 M14.6 15.4 l2.7 3.7 M9.4 15.4 l-2.7 3.7 M7.8 10.5 L3.5 9.1"/></svg></span>
           <h4>Football</h4>
-          <p>Supporter passionné — et les stats de match, évidemment.</p>
+          <p>Supporter passionné, et les stats de match, évidemment.</p>
         </div>
         <div class="hobby reveal" style="--i:1">
-          <span class="hobby-emoji" aria-hidden="true">📖</span>
+          <span class="hobby-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5 C9.5 4.8 6 4.5 3 5 v13.5 c3 -0.5 6.5 -0.2 9 1.5 c2.5 -1.7 6 -2 9 -1.5 V5 c-3 -0.5 -6.5 -0.2 -9 1.5 Z"/><line x1="12" y1="6.5" x2="12" y2="20"/><path d="M6 9 h3 M6 12 h3 M15 9 h3"/></svg></span>
           <h4>Culture manga</h4>
-          <p>Grand lecteur — la narration japonaise n'a pas d'égale.</p>
+          <p>Grand lecteur : la narration japonaise n'a pas d'égale.</p>
         </div>
         <div class="hobby reveal" style="--i:2">
-          <span class="hobby-emoji" aria-hidden="true">⛓️</span>
+          <span class="hobby-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8.5" width="7" height="7" rx="1.5"/><rect x="14.5" y="8.5" width="7" height="7" rx="1.5"/><line x1="9.5" y1="12" x2="14.5" y2="12"/><path d="M6 8.5 V5 h12 v3.5 M6 15.5 V19 h12 v-3.5"/></svg></span>
           <h4>Crypto &amp; blockchain</h4>
           <p>Curieux des technologies décentralisées.</p>
         </div>
         <div class="hobby reveal" style="--i:3">
-          <span class="hobby-emoji" aria-hidden="true">🚀</span>
+          <span class="hobby-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 L5 5 h14 l2 5.5"/><path d="M3 10.5 c0 1.7 1.3 3 3 3 s3 -1.3 3 -3 c0 1.7 1.3 3 3 3 s3 -1.3 3 -3 c0 1.7 1.3 3 3 3 s3 -1.3 3 -3"/><path d="M5 13 V20 h14 V13"/><path d="M10 20 v-4 h4 v4"/></svg></span>
           <h4>Entrepreneuriat</h4>
-          <p>Commerce familial et projets personnels en construction.</p>
+          <p>Commerce familial depuis 2016, et PRESSO, mon agence, depuis fin 2025.</p>
         </div>
       </div>
     </section>
@@ -700,7 +825,7 @@
         <div class="contact-intro">
           <span class="folio folio--light">07</span>
           <h2>Un projet en tête&nbsp;?<br><em>Écrivez-moi.</em></h2>
-          <p>Je réponds vite — souvent le jour même.</p>
+          <p>Je réponds vite, souvent le jour même.</p>
 
           <ul class="contact-list">
             <li>
@@ -709,8 +834,8 @@
             </li>
             <li>
               <span class="c-label">Téléphone</span>
+              <a href="tel:+2290147167062" class="link-sweep">+229 01 47 16 70 62</a>
               <a href="tel:+2290153943751" class="link-sweep">+229 01 53 94 37 51</a>
-              <a href="tel:+2290153840744" class="link-sweep">+229 01 53 84 07 44</a>
             </li>
             <li>
               <span class="c-label">WhatsApp</span>
@@ -763,7 +888,7 @@
 
   <!-- ══════════ FOOTER ══════════ -->
   <footer class="footer">
-    <p><span class="logo-mark">P.</span> Péniel-Prestige Toton — fait main en HTML, CSS &amp; JS.</p>
+    <p><span class="logo-mark">P.</span> Péniel-Prestige Toton. Fait main en HTML, CSS &amp; JS.</p>
     <p class="footer-fine">© 2026 · Abomey-Calavi, Bénin</p>
   </footer>
 
@@ -771,6 +896,6 @@
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>(function(){ emailjs.init("MPIGnT1kXc48OD8Kh"); })();</script>
 
-  <script src="script.js?v=20260711"></script>
+  <script src="script.js?v=20261021"></script>
 </body>
 </html>

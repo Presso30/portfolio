@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════
    PORTFOLIO — Péniel Toton « Presso »
-   Interactions : thème, nav, reveals, canvas, formulaire
+   Interactions : thème, nav, reveals, planche du hero, formulaire
    ═══════════════════════════════════════════════════ */
 
 "use strict";
@@ -126,97 +126,105 @@ window.addEventListener("scroll", () => {
   nums.forEach((el) => obs.observe(el));
 })();
 
-/* ── Canvas : champ de points de données (hero) ───── */
-(function initDataField() {
-  const canvas = document.getElementById("dataField");
-  if (!canvas || prefersReducedMotion) return;
-  const ctx = canvas.getContext("2d");
+/* ── Planche du hero : brut → structuré → décidé ───── */
+(function initPlate() {
+  const svg = document.getElementById("plateSvg");
+  if (!svg) return;
+  const layer = svg.querySelector(".plate-points");
+  const steps = document.querySelectorAll(".plate-steps li");
+  const NS = "http://www.w3.org/2000/svg";
 
-  let w, h, points = [], raf;
-  const DENSITY = 1 / 16000; // points par pixel²
-  const LINK_DIST = 130;
+  // générateur pseudo-aléatoire à graine fixe : même dessin à chaque visite
+  let seed = 7;
+  const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
 
-  const colors = () => {
-    const dark = document.documentElement.getAttribute("data-theme") === "dark";
-    return {
-      dot: dark ? "rgba(147,164,216,0.55)" : "rgba(43,58,103,0.4)",
-      link: dark ? "rgba(147,164,216," : "rgba(43,58,103,",
-      coral: dark ? "rgba(239,138,113,0.8)" : "rgba(226,114,91,0.7)",
-    };
-  };
+  const COLS = [4, 7, 12, 9, 6, 4]; // 42 points, la colonne la plus haute est « la décision »
+  const N = COLS.reduce((a, b) => a + b, 0);
+  const HOT = COLS.indexOf(Math.max(...COLS));
 
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = canvas.offsetWidth;
-    h = canvas.offsetHeight;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    const count = Math.min(Math.round(w * h * DENSITY), 90);
-    points = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      r: Math.random() * 1.8 + 0.8,
-      coral: Math.random() < 0.12,
-    }));
-  }
-
-  function frame() {
-    ctx.clearRect(0, 0, w, h);
-    const c = colors();
-
-    for (const p of points) {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > w) p.vx *= -1;
-      if (p.y < 0 || p.y > h) p.vy *= -1;
+  // état 0 : nuage en désordre
+  const raw = Array.from({ length: N }, () => ({ x: 44 + rand() * 292, y: 34 + rand() * 214 }));
+  // état 1 : aligné sur la tendance, avec un reste de bruit
+  const trend = Array.from({ length: N }, (_, i) => {
+    const x = 46 + (i / (N - 1)) * 288;
+    return { x, y: 238 - (x - 38) * 0.583 + (rand() - 0.5) * 34 };
+  });
+  // état 2 : rangé en colonnes (histogramme en points)
+  const cols = [], hot = [];
+  COLS.forEach((count, c) => {
+    for (let k = 0; k < count; k++) {
+      cols.push({ x: 70 + c * 50, y: 250 - k * 16 });
+      hot.push(c === HOT);
     }
+  });
+  // on mélange l'ordre des colonnes pour que chaque point voyage vraiment
+  const order = Array.from({ length: N }, (_, i) => i).sort(() => rand() - 0.5);
+  const states = [raw, trend, order.map((i) => cols[i])];
+  const hotAt = order.map((i) => hot[i]);
 
-    for (let i = 0; i < points.length; i++) {
-      for (let j = i + 1; j < points.length; j++) {
-        const a = points[i], b = points[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const d = Math.hypot(dx, dy);
-        if (d < LINK_DIST) {
-          ctx.strokeStyle = c.link + (0.14 * (1 - d / LINK_DIST)).toFixed(3) + ")";
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    for (const p of points) {
-      ctx.fillStyle = p.coral ? c.coral : c.dot;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    raf = requestAnimationFrame(frame);
-  }
-
-  // pause quand le hero sort de l'écran (économie batterie)
-  const hero = document.querySelector(".hero");
-  const visObs = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) { if (!raf) raf = requestAnimationFrame(frame); }
-      else { cancelAnimationFrame(raf); raf = null; }
-    });
-  }, { threshold: 0.05 });
-  visObs.observe(hero);
-
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(resize, 200);
+  const dots = Array.from({ length: N }, (_, i) => {
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("r", "4.6");
+    layer.appendChild(c);
+    return c;
   });
 
-  resize();
+  let current = states[2].map((p) => ({ ...p }));
+  const place = () => dots.forEach((d, i) => {
+    d.setAttribute("cx", current[i].x.toFixed(1));
+    d.setAttribute("cy", current[i].y.toFixed(1));
+  });
+
+  function show(step) {
+    svg.dataset.state = step;
+    steps.forEach((li) => li.classList.toggle("is-on", Number(li.dataset.step) === step));
+    dots.forEach((d, i) => d.classList.toggle("is-hot", step === 2 && hotAt[i]));
+  }
+
+  if (prefersReducedMotion) { place(); show(2); return; }
+
+  const easeOutExpo = (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
+  const DURATION = 1300, STAGGER = 14, HOLD = 2600;
+  let step = 0, from = null, start = 0, raf = null, timer = null, running = false;
+
+  current = states[0].map((p) => ({ ...p }));
+  place(); show(0);
+
+  function animate(now) {
+    let done = true;
+    for (let i = 0; i < N; i++) {
+      const t = Math.min(Math.max((now - start - i * STAGGER) / DURATION, 0), 1);
+      if (t < 1) done = false;
+      const e = easeOutExpo(t), to = states[step][i];
+      current[i].x = from[i].x + (to.x - from[i].x) * e;
+      current[i].y = from[i].y + (to.y - from[i].y) * e;
+    }
+    place();
+    if (done) { raf = null; timer = setTimeout(next, HOLD); }
+    else raf = requestAnimationFrame(animate);
+  }
+
+  function next() {
+    step = (step + 1) % 3;
+    from = current.map((p) => ({ ...p }));
+    start = performance.now();
+    show(step);
+    raf = requestAnimationFrame(animate);
+  }
+
+  function play() { if (!running) { running = true; timer = setTimeout(next, 900); } }
+  function pause() {
+    running = false;
+    clearTimeout(timer); cancelAnimationFrame(raf); raf = null;
+  }
+
+  // pause quand la planche sort de l'écran ou que l'onglet est caché
+  let inView = false;
+  new IntersectionObserver(([e]) => {
+    inView = e.isIntersecting;
+    inView ? play() : pause();
+  }, { threshold: 0.2 }).observe(svg);
+  document.addEventListener("visibilitychange", () => (document.hidden ? pause() : inView && play()));
 })();
 
 /* ── Formulaire de contact (EmailJS) ──────────────── */
@@ -300,19 +308,6 @@ contactForm.addEventListener("submit", (e) => {
       submitBtn.textContent = "Envoyer le message";
     });
 });
-
-/* ── Portrait : rotation automatique du stack ─────── */
-(function initPortraitStack() {
-  const frames = Array.from(document.querySelectorAll(".portrait-frame[data-pos]"));
-  if (frames.length < 2 || prefersReducedMotion) return;
-
-  setInterval(() => {
-    frames.forEach((frame) => {
-      const pos = parseInt(frame.getAttribute("data-pos"), 10);
-      frame.setAttribute("data-pos", String((pos + 2) % 3));
-    });
-  }, 4000);
-})();
 
 function notify(text) {
   const el = document.createElement("div");
