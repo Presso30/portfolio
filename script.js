@@ -433,3 +433,15 @@ function notify(kind, title, text) {
     setTimeout(() => el.remove(), 400);
   }, kind === "error" ? 9000 : 4200);
 }
+
+/* ── Schémas des projets : le point qui suit le flux tourne seulement à l'écran ── */
+(() => {
+  const svgs = document.querySelectorAll(".flow-svg");
+  if (!svgs.length) return;
+  if (prefersReducedMotion) { svgs.forEach((s) => s.pauseAnimations && s.pauseAnimations()); return; }
+  if (!("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver((list) => {
+    list.forEach((e) => e.isIntersecting ? e.target.unpauseAnimations() : e.target.pauseAnimations());
+  });
+  svgs.forEach((s) => { s.pauseAnimations(); io.observe(s); });
+})();

@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   PORTFOLIO — Péniel Toton « Presso »
+   PORTFOLIO · Péniel Toton « Presso »
    Direction : éditorial indépendant · indigo + corail
    Fraunces (display) · Hanken Grotesk (corps) · Spline Sans Mono (labels)
    ═══════════════════════════════════════════════════════ */
@@ -94,7 +94,7 @@ a:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-r
   font-weight: 500;
   letter-spacing: 0.04em;
   padding: 0.85rem 1.7rem;
-  border-radius: 100px;
+  border-radius: 4px;
   border: 1.5px solid transparent;
   cursor: pointer;
   transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out),
@@ -184,7 +184,7 @@ a:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-r
 
 .nav-link--cta {
   border: 1.5px solid var(--coral);
-  border-radius: 100px;
+  border-radius: 4px;
   padding: 0.45rem 1.1rem;
   color: var(--coral-ink);
   font-weight: 600;
@@ -261,9 +261,14 @@ a:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-r
 }
 .hero-title .line { display: block; }
 .hero-title em {
-  font-style: italic;
+  font-style: normal;
   font-weight: 600;
   color: var(--indigo);
+  /* données brutes : soulignement en pointillés, face au trait continu de « décisions claires » */
+  text-decoration: underline dotted;
+  text-decoration-color: color-mix(in srgb, var(--indigo) 55%, transparent);
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.16em;
 }
 [data-theme="dark"] .hero-title em { color: var(--indigo); }
 
@@ -501,7 +506,7 @@ a:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-r
   font-size: 0.72rem;
   letter-spacing: 0.05em;
   padding: 0.28rem 0.7rem;
-  border-radius: 100px;
+  border-radius: 4px;
   border: 1px solid var(--line);
   color: var(--mist);
   background: var(--paper-raised);
@@ -567,7 +572,7 @@ a:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-r
   font-size: 0.72rem;
   letter-spacing: 0.04em;
   padding: 0.26rem 0.68rem;
-  border-radius: 100px;
+  border-radius: 4px;
   background: var(--indigo-soft);
   color: var(--indigo);
 }
@@ -645,7 +650,7 @@ a:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-r
   color: var(--ok);
   border: 1.5px solid var(--ok);
   padding: 0.14rem 0.55rem;
-  border-radius: 100px;
+  border-radius: 4px;
   vertical-align: middle;
   margin-left: 0.45rem;
   white-space: nowrap;
@@ -704,7 +709,7 @@ a:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-r
   margin-bottom: 0.8rem;
   color: #f7f4ed;
 }
-.contact-intro h2 em { font-style: italic; color: var(--coral); }
+.contact-intro h2 em { font-style: normal; font-weight: 600; color: var(--coral); }
 .contact-intro > p { color: #b8bdd4; margin-bottom: 2.2rem; }
 
 .contact-list { display: grid; gap: 1.05rem; }
@@ -1267,6 +1272,7 @@ a:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-r
   html { scroll-behavior: auto; }
   .load-reveal, .reveal { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
   .caret-blink { animation: none; }
+  .flow-dot { display: none; }
   .js .traj-bar, .js .ix-lead, .postmark { transform: none !important; }
   .js .traj-tag, .js .traj-now, .js .ix-entry { opacity: 1 !important; transform: none !important; }
   .mark-stroke path { animation: none; stroke-dashoffset: 0; }
